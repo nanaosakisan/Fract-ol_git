@@ -13,7 +13,11 @@
 NAME = fractol
 
 SRC_PATH = src/
-SRC_NAME =	main.c
+SRC_NAME =	init_struct.c				\
+			key_hook_1.c				\
+			main.c						\
+			mandelbrot.c				\
+			mlx_pixel_put_to_image.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 
@@ -29,7 +33,7 @@ HEADER_NAME = libmlx.a
 HEADER = $(addprefix $(HEADER_PATH), $(HEADER_NAME))
 
 FLAGS = -Wall -Werror -Wextra -g
-FLAGS_LIBX = -lmlx -framework OpenGL -framework AppKit
+FLAGS_LIBX = -lmlx -framework OpenGL -framework AppKit -lpthread
 
 .PHONY: all, build, creadir, clean, fclean, rebuild, re
 

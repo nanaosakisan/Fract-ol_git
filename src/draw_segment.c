@@ -10,34 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/fractol.h"
 
-void			mlx_pixel_put_to_image(t_fdf *global, int x, int y, int color)
-{
-	int i;
-
-	if (global->img.endian == 0)
-	{
-		i = (global->img.size * y) + (x * (global->img.bpp / 8));
-		global->img.img_addr[i] = mlx_get_color_value(global->img.p_mlx, color);
-		global->img.img_addr[i + 1] = mlx_get_color_value(global->img.p_mlx, \
-																	color >> 8);
-		global->img.img_addr[i + 2] = mlx_get_color_value(global->img.p_mlx, \
-																color >> 16);
-	}
-	else
-	{
-		i = (global->img.size * y) + (x * (global->img.bpp / 8));
-		global->img.img_addr[i] = mlx_get_color_value(global->img.p_mlx, \
-																color >> 16);
-		global->img.img_addr[i + 1] = mlx_get_color_value(global->img.p_mlx, \
-																	color >> 8);
-		global->img.img_addr[i + 2] = mlx_get_color_value(global->img.p_mlx, \
-																		color);
-	}
-}
-
-static void		draw_horizon(float *coord, int *diff, int *inc, t_fdf *global)
+static void		draw_horizon(float *coord, int *diff, int *inc, \
+															t_global *global)
 {
 	int		i;
 	int		cumul;
@@ -56,11 +32,12 @@ static void		draw_horizon(float *coord, int *diff, int *inc, t_fdf *global)
 			coord[0] += inc[0];
 		}
 		if ((x1 > 0 && x1 < WIDTH) && (coord[0] > 0 && coord[0] < HEIGHT))
-			mlx_pixel_put_to_image(global, x1, coord[0], global->coords.color);
+			mlx_pixel_put_to_image(global, x1, coord[0], 0xFFFFFF);
 	}
 }
 
-static void		draw_vertical(float *coord, int *diff, int *inc, t_fdf *global)
+static void		draw_vertical(float *coord, int *diff, int *inc, \
+															t_global *global)
 {
 	int i;
 	int cumul;
@@ -78,12 +55,12 @@ static void		draw_vertical(float *coord, int *diff, int *inc, t_fdf *global)
 		}
 		if ((coord[1] > 0 && coord[1] < WIDTH) && (coord[0] > 0 && coord[0] < \
 																		HEIGHT))
-			mlx_pixel_put_to_image(global, coord[1], coord[0], \
-														global->coords.color);
+			mlx_pixel_put_to_image(global, coord[1], coord[0], 0xFFFFFF);
 	}
 }
 
-void			draw_segment(float *coord_src, float *coord_dst, t_fdf *global)
+void			draw_segment(float *coord_src, float *coord_dst, \
+															t_global *global)
 {
 	int diff[2];
 	int inc[2];
@@ -96,8 +73,7 @@ void			draw_segment(float *coord_src, float *coord_dst, t_fdf *global)
 	diff[1] = abs(diff[1]);
 	if ((coord_src[1] > 0 && coord_src[1] < WIDTH) && (coord_src[0] > 0 && \
 														coord_src[0] < HEIGHT))
-		mlx_pixel_put_to_image(global, coord_src[1], coord_src[0], \
-														global->coords.color);
+		mlx_pixel_put_to_image(global, coord_src[1], coord_src[0], 0xFFFFFF);
 	if (diff[1] > diff[0])
 		draw_horizon(coord_src, diff, inc, global);
 	else
