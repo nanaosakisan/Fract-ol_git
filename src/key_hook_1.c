@@ -61,7 +61,6 @@ int		close_map(t_global *global, int key)
 	if (key != 53)
 		return (0);
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	// free_coord(global);
 	global->img.p_mlx = NULL;
 	global->img.p_win = NULL;
 	global->img.p_img = NULL;

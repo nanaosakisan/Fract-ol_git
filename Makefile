@@ -15,6 +15,7 @@ NAME = fractol
 SRC_PATH = src/
 SRC_NAME =	init_struct.c				\
 			key_hook_1.c				\
+			key_hook_2.c				\
 			main.c						\
 			mandelbrot.c				\
 			mlx_pixel_put_to_image.c

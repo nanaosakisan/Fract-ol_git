@@ -22,7 +22,6 @@
 # define HEIGHT	1000
 # define WIDTH	1000
 # define I_MAX	50
-# define ZOOM	100
 
 typedef	struct	s_img
 {
@@ -35,12 +34,28 @@ typedef	struct	s_img
 	int		endian;
 }				t_img;
 
+typedef struct	s_mandelbrot
+{
+	long double	y1;
+	long double y2;
+	long double	x1;
+	long double	x2;
+	long double	img_x;
+	long double	img_y;
+	long double	zoom_x;
+	long double	zoom_y;
+	long double	c_r;
+	long double	c_i;
+}				t_mandel;
+
 typedef struct	s_global
 {
-	char 	*name;
-	t_img	img;
-	int		(*function[1]) (struct s_global*, int);
-	int		len_array;
+	char		*name;
+	t_img		img;
+	t_mandel	mandel;
+	int			(*function[2]) (struct s_global*, int);
+	int			len_array;
+	int			zoom;
 }				t_global;
 
 int			close_map(t_global *global, int key);
@@ -50,4 +65,6 @@ void		init_global(t_global *global);
 int			main(int ac, char **av);
 int			mandelbrot(t_global *global);
 void		mlx_pixel_put_to_image(t_global *dna, int x, int y, int color);
+int			zoom(t_global *global, int key);
+
 # endif
