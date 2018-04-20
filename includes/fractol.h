@@ -21,7 +21,6 @@
 
 # define HEIGHT	1000
 # define WIDTH	1000
-# define I_MAX	50
 
 typedef	struct	s_img
 {
@@ -53,18 +52,24 @@ typedef struct	s_global
 	char		*name;
 	t_img		img;
 	t_mandel	mandel;
-	int			(*function[2]) (struct s_global*, int);
+	int			(*function[5]) (struct s_global*, int);
 	int			len_array;
 	int			zoom;
+	int			iter_max;
+	int			pos[2];
+	int 		move[2];
 }				t_global;
 
 int			close_map(t_global *global, int key);
 int			deal_key(int key, t_global *global);
 void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
 void		init_global(t_global *global);
+int			init_map(t_global *global, int key);
 int			main(int ac, char **av);
 int			mandelbrot(t_global *global);
 void		mlx_pixel_put_to_image(t_global *dna, int x, int y, int color);
+int			move_right_and_left(t_global *global, int key);
+int			move_up_and_down(t_global *global, int key);
 int			zoom(t_global *global, int key);
 
 # endif

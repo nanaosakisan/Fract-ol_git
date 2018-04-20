@@ -34,6 +34,8 @@ static void	init_mandel(t_global *global)
 	global->mandel.zoom_y = 0;
 	global->mandel.c_r = 0;
 	global->mandel.c_i = 0;
+	global->zoom = 100;
+	global->iter_max = 50;
 }
 
 void		init_global(t_global *global)
@@ -41,8 +43,14 @@ void		init_global(t_global *global)
 	global->name = NULL;
 	global->function[0] = &close_map;
 	global->function[1] = &zoom;
-	global->len_array = 2;
-	global->zoom = 350;
+	global->function[2] = &move_up_and_down;
+	global->function[3] = &move_right_and_left;
+	global->function[4] = &init_map;
+	global->len_array = 5;
+	global->pos[0] = 0;
+	global->pos[1] = 0;
+	global->move[0] = 0;
+	global->move[1] = 0;
 	init_img(&global->img);
 	init_mandel(global);
 }

@@ -16,10 +16,10 @@ int				zoom(t_global *global, int key)
 {
 	if (key != 116 && key != 121)
 		return (0);
-	else
-		global->zoom = (key == 116) ? global->zoom * 1.5 : global->zoom * 0.85;
-	ft_putstr("zoom = ");
-	ft_putnbr_endl(global->zoom);
+	else if (key == 116)
+		global->zoom = (global->zoom < 400) ? global->zoom * 1.5 : global->zoom;
+	else if (key == 121)
+		global->zoom = (global->zoom > 0) ? global->zoom * 0.85 : global->zoom;
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	mandelbrot(global);
 	return (1);

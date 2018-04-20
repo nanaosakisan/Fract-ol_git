@@ -12,6 +12,12 @@
 
 #include "../includes/fractol.h"
 
+static void	init_pos(t_global *global)
+{
+	global->pos[0] = (HEIGHT / 2 - global->mandel.img_y / 2) + global->move[0];
+	global->pos[1] = (WIDTH / 2 - global->mandel.img_x / 2) + global->move[1];
+}
+
 static int	algorithm(int x, int y, t_global *global)
 {
 	int			i;
@@ -24,17 +30,19 @@ static int	algorithm(int x, int y, t_global *global)
 	global->mandel.c_i = y / global->mandel.zoom_y + global->mandel.y1;
 	z_r = 0;
 	z_i = 0;
-	while ((z_r * z_r + z_i * z_i < 4) && i < I_MAX)
+	while ((z_r * z_r + z_i * z_i < 4) && i < global->iter_max)
 	{
 		tmp = z_r;
 		z_r = z_r * z_r - z_i * z_i + global->mandel.c_r;
 		z_i = 2 * z_i * tmp - global->mandel.c_i;
 		i++;
 	}
-	if (i == I_MAX)
-		mlx_pixel_put_to_image(global, x, y, 0xFFFFFF);
-	else if (i >1)
-		mlx_pixel_put_to_image(global, x, y, 0x000000);
+	if (i == global->iter_max)
+		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
+																	0xFFFFFF);
+	else if (i > 1)
+		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
+																	0x000000);
 	return (0);
 }
 
@@ -43,6 +51,9 @@ int		mandelbrot(t_global *global)
 	int			x;
 	int			y;
 
+	global->img.p_img = mlx_new_image(global->img.p_mlx, WIDTH, HEIGHT);
+	global->img.img_addr = mlx_get_data_addr(global->img.p_img, \
+					&global->img.bpp, &global->img.size, &global->img.endian);
 	x = -1;
 	global->mandel.img_y = (global->mandel.y2 - global->mandel.y1) * \
 																global->zoom;
@@ -52,6 +63,7 @@ int		mandelbrot(t_global *global)
 															global->mandel.x1);
 	global->mandel.zoom_y = global->mandel.img_y / (global->mandel.y2 - \
 															global->mandel.y1);
+	init_pos(global);
 	while (++x < global->mandel.img_x && x <= WIDTH)
 	{
 		y = -1;
