@@ -46,11 +46,14 @@ void		init_global(t_global *global)
 	global->function[2] = &move_up_and_down;
 	global->function[3] = &move_right_and_left;
 	global->function[4] = &init_map;
-	global->len_array = 5;
+	global->function[5] = &iteration;
+	global->len_array = 6;
 	global->pos[0] = 0;
 	global->pos[1] = 0;
 	global->move[0] = 0;
 	global->move[1] = 0;
+	global->color1 = 0x800080;
+	global->color2 = 0xFFFFFF;
 	init_img(&global->img);
 	init_mandel(global);
 }

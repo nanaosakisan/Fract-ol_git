@@ -21,6 +21,7 @@ static void	init_pos(t_global *global)
 static int	algorithm(int x, int y, t_global *global)
 {
 	int			i;
+	static int	cpt = 1;
 	long double	z_r;
 	long double	z_i;
 	long double	tmp;
@@ -39,10 +40,11 @@ static int	algorithm(int x, int y, t_global *global)
 	}
 	if (i == global->iter_max)
 		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
-																	0xFFFFFF);
+													display_color(global, 0));
 	else if (i > 1)
 		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
 																	0x000000);
+	cpt++;
 	return (0);
 }
 

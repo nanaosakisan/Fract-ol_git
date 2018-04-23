@@ -52,19 +52,23 @@ typedef struct	s_global
 	char		*name;
 	t_img		img;
 	t_mandel	mandel;
-	int			(*function[5]) (struct s_global*, int);
+	int			(*function[6]) (struct s_global*, int);
 	int			len_array;
 	int			zoom;
 	int			iter_max;
 	int			pos[2];
 	int 		move[2];
+	int			color1;
+	int			color2;
 }				t_global;
 
 int			close_map(t_global *global, int key);
 int			deal_key(int key, t_global *global);
+int			display_color(t_global *global, int i);
 void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
 void		init_global(t_global *global);
 int			init_map(t_global *global, int key);
+int			iteration(t_global *global, int key);
 int			main(int ac, char **av);
 int			mandelbrot(t_global *global);
 void		mlx_pixel_put_to_image(t_global *dna, int x, int y, int color);
