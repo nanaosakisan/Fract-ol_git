@@ -19,7 +19,8 @@ SRC_NAME =	display_color.c				\
 			key_hook_2.c				\
 			main.c						\
 			mandelbrot.c				\
-			mlx_pixel_put_to_image.c
+			mlx_pixel_put_to_image.c	\
+			mouse_hook.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 

@@ -28,14 +28,23 @@ static void	init_mandel(t_global *global)
 	global->mandel.y2 = 1.2;
 	global->mandel.x1 = -2.1;
 	global->mandel.x2 = 0.6;
-	global->mandel.img_y = 0;
-	global->mandel.img_x = 0;
+	global->mandel.img_y = HEIGHT;
+	global->mandel.img_x = WIDTH;
 	global->mandel.zoom_x = 0;
 	global->mandel.zoom_y = 0;
 	global->mandel.c_r = 0;
 	global->mandel.c_i = 0;
-	global->zoom = 100;
+	global->zoom = 300;
 	global->iter_max = 50;
+}
+
+static void init_tmp(t_global *global)
+{
+	global->tmp.iter_max = global->iter_max;
+	global->tmp.y1 = global->mandel.y1;
+	global->tmp.y2 = global->mandel.y2;
+	global->tmp.x1 = global->mandel.x1;
+	global->tmp.x2 = global->mandel.x2;
 }
 
 void		init_global(t_global *global)
@@ -47,13 +56,16 @@ void		init_global(t_global *global)
 	global->function[3] = &move_right_and_left;
 	global->function[4] = &init_map;
 	global->function[5] = &iteration;
+	global->mouse_func[0] = &pointed_zoom;
 	global->len_array = 6;
+	global->len_mouse = 1;
 	global->pos[0] = 0;
 	global->pos[1] = 0;
 	global->move[0] = 0;
 	global->move[1] = 0;
-	global->color1 = 0x800080;
-	global->color2 = 0xFFFFFF;
+	global->color1 = 0x000000;
+	global->color2 = 0x773060;
 	init_img(&global->img);
 	init_mandel(global);
+	init_tmp(global);
 }

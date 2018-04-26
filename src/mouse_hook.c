@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook_2.c                                       :+:      :+:    :+:   */
+/*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/21 15:02:01 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/03/28 15:55:18 by iporsenn         ###   ########.fr       */
+/*   Created: 2018/04/24 15:40:08 by iporsenn          #+#    #+#             */
+/*   Updated: 2018/04/24 15:40:10 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int				zoom(t_global *global, int key)
+int		pointed_zoom(int key, int x, int y, t_global *global)
 {
-	if (key != 69 && key != 78)
+	if (key != 1 && key != 2 && !x && !y)
 		return (0);
-	else if (key == 69)
+	else if (key == 1)
 	{
 		global->mandel.y1 += 0.10;
 		global->mandel.y2 -= 0.10;
 		global->mandel.x1 += 0.10;
 		global->mandel.x2 -= 0.10;
 	}
-	else if (key == 78)
+	else if (key == 2)
 	{
 		global->mandel.y1 -= 0.10;
 		global->mandel.y2 += 0.10;
@@ -35,18 +35,12 @@ int				zoom(t_global *global, int key)
 	return (1);
 }
 
-int				iteration(t_global *global, int key)
+int		mouse_hook(int key, int x, int y, t_global *global)
 {
-	if (key != 116 && key != 121)
-		return (0);
-	else if (key == 116)
-		global->iter_max += 10;
-	else if (key == 121)
-	{
-		if (global->iter_max > 20)
-			global->iter_max -= 10;
-	}
-	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	mandelbrot(global);
-	return (1);
+	int i;
+
+	i = 0;
+	while (i < global->len_mouse && !global->mouse_func[i](key, x, y, global))
+		i++;
+	return (0);
 }

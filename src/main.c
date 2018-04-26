@@ -29,6 +29,7 @@ int		main(int ac, char **av)
 															global.name);
 		mandelbrot(&global);
 		mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
+		mlx_mouse_hook(global.img.p_win, mouse_hook, &global);
 		mlx_loop(global.img.p_mlx);
 	}
 	return(0);
