@@ -18,20 +18,22 @@ int				zoom(t_global *global, int key)
 		return (0);
 	else if (key == 69)
 	{
-		global->mandel.y1 += 0.10;
-		global->mandel.y2 -= 0.10;
-		global->mandel.x1 += 0.10;
-		global->mandel.x2 -= 0.10;
+		global->zoom += 10;
+		// global->mandel.y1 += 0.10;
+		// global->mandel.y2 -= 0.10;
+		// global->mandel.x1 += 0.10;
+		// global->mandel.x2 -= 0.10;
 	}
 	else if (key == 78)
 	{
-		global->mandel.y1 -= 0.10;
-		global->mandel.y2 += 0.10;
-		global->mandel.x1 -= 0.10;
-		global->mandel.x2 += 0.10;
+		global->zoom -= 10;
+		// global->mandel.y1 -= 0.10;
+		// global->mandel.y2 += 0.10;
+		// global->mandel.x1 -= 0.10;
+		// global->mandel.x2 += 0.10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	mandelbrot(global);
+	launch_draw(global);
 	return (1);
 }
 
@@ -47,6 +49,6 @@ int				iteration(t_global *global, int key)
 			global->iter_max -= 10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	mandelbrot(global);
+	launch_draw(global);
 	return (1);
 }

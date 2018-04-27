@@ -50,6 +50,7 @@ typedef struct	s_mandelbrot
 typedef struct	s_tmp
 {
 	int iter_max;
+	int zoom;
 	long double	y1;
 	long double	y2;
 	long double	x1;
@@ -70,8 +71,7 @@ typedef struct	s_global
 	int			iter_max;
 	int			pos[2];
 	int 		move[2];
-	int			color1;
-	int			color2;
+	int			color1[3];
 	int			switch_color;
 }				t_global;
 
@@ -82,8 +82,8 @@ void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
 void		init_global(t_global *global);
 int			init_map(t_global *global, int key);
 int			iteration(t_global *global, int key);
+int			launch_draw(t_global *global);
 int			main(int ac, char **av);
-int			mandelbrot(t_global *global);
 void		mlx_pixel_put_to_image(t_global *dna, int x, int y, int color);
 int			mouse_hook(int key, int x, int y, t_global *global);
 int			move_right_and_left(t_global *global, int key);

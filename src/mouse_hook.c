@@ -31,7 +31,7 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 		global->mandel.x2 += 0.10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	mandelbrot(global);
+	launch_draw(global);
 	return (1);
 }
 
