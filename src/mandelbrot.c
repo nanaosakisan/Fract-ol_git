@@ -91,6 +91,8 @@ static void	*mandelbrot(void *data)
 
 int		launch_draw(t_global *global)
 {
+	int i;
+
 	global->img.p_img = mlx_new_image(global->img.p_mlx, WIDTH, HEIGHT);
 	global->img.img_addr = mlx_get_data_addr(global->img.p_img, \
 					&global->img.bpp, &global->img.size, &global->img.endian);
@@ -103,22 +105,12 @@ int		launch_draw(t_global *global)
 	global->mandel.zoom_y = global->mandel.img_y / (global->mandel.y2 - \
 															global->mandel.y1);
 	init_pos(global);
-	pthread_create(&global->thread[0], NULL, mandelbrot, global);
-	pthread_create(&global->thread[1], NULL, mandelbrot, global);
-	pthread_create(&global->thread[2], NULL, mandelbrot, global);
-	pthread_create(&global->thread[3], NULL, mandelbrot, global);
-	pthread_create(&global->thread[4], NULL, mandelbrot, global);
-	pthread_create(&global->thread[5], NULL, mandelbrot, global);
-	pthread_create(&global->thread[6], NULL, mandelbrot, global);
-	pthread_create(&global->thread[7], NULL, mandelbrot, global);
-	pthread_join(global->thread[0], NULL);
-	pthread_join(global->thread[1], NULL);
-	pthread_join(global->thread[2], NULL);
-	pthread_join(global->thread[3], NULL);
-	pthread_join(global->thread[4], NULL);
-	pthread_join(global->thread[5], NULL);
-	pthread_join(global->thread[6], NULL);
-	pthread_join(global->thread[7], NULL);
+	i = -1;
+	while (++i < THREAD)
+		pthread_create(&global->thread[i], NULL, mandelbrot, global);
+	i = -1;
+	while (++i < THREAD)
+		pthread_join(global->thread[i], NULL);
 	mlx_put_image_to_window(global->img.p_mlx, global->img.p_win, \
 													global->img.p_img, 0, 0);
 	return (0);

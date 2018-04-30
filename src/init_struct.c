@@ -62,6 +62,9 @@ static void	init_color(t_color *color)
 
 void		init_global(t_global *global)
 {
+	int i;
+
+	i = -1;
 	global->name = NULL;
 	global->function[0] = &close_map;
 	global->function[1] = &zoom;
@@ -77,14 +80,8 @@ void		init_global(t_global *global)
 	global->pos[1] = 0;
 	global->move[0] = 0;
 	global->move[1] = 0;
-	global->thread[0] = 0;
-	global->thread[1] = 0;
-	global->thread[2] = 0;
-	global->thread[3] = 0;
-	global->thread[4] = 0;
-	global->thread[5] = 0;
-	global->thread[6] = 0;
-	global->thread[7] = 0;
+	while (++i < THREAD)
+		global->thread[i] = 0;
 	init_img(&global->img);
 	init_mandel(global);
 	init_color(&global->color);

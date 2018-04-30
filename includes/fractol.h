@@ -21,7 +21,7 @@
 
 # define HEIGHT 800
 # define WIDTH 800
-# define THREAD 8
+# define THREAD 16
 
 typedef	struct	s_img
 {
@@ -77,7 +77,7 @@ typedef struct	s_global
 	int			iter_max;
 	int			pos[2];
 	int 		move[2];
-	pthread_t	thread[8];
+	pthread_t	thread[THREAD];
 }				t_global;
 
 int			close_map(t_global *global, int key);
