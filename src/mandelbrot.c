@@ -47,24 +47,22 @@ static void	color(t_global *global, int x, int y, int i)
 static int	algorithm(int x, int y, t_global *global)
 {
 	int			i;
-	long double	z_r;
-	long double	z_i;
+	long double	z[2];
+	long double c[2];
 	long double	tmp;
 
 	i = 0;
-	pthread_mutex_lock(&global->mandel.mutex);
-	global->mandel.c_r = (x / global->mandel.zoom_x + global->mandel.x1);
-	global->mandel.c_i = (y / global->mandel.zoom_y + global->mandel.y1);
-	z_r = 0;
-	z_i = 0;
-	while ((z_r * z_r + z_i * z_i < 4) && i < global->iter_max)
+	c[0] = (x / global->mandel.zoom_x + global->mandel.x1);
+	c[1] = (y / global->mandel.zoom_y + global->mandel.y1);
+	z[0] = 0;
+	z[1] = 0;
+	while ((z[0] * z[0] + z[1] * z[1] < 4) && i < global->iter_max)
 	{
-		tmp = z_r;
-		z_r = z_r * z_r - z_i * z_i + global->mandel.c_r;
-		z_i = 2 * z_i * tmp - global->mandel.c_i;
+		tmp = z[0];
+		z[0] = z[0] * z[0] - z[1] * z[1] + c[0];
+		z[1] = 2 * z[1] * tmp - c[1];
 		i++;
 	}
-	pthread_mutex_unlock(&global->mandel.mutex);
 	color(global, x, y, i);
 	return (0);
 }
@@ -79,7 +77,7 @@ static void	*mandelbrot(void *data)
 
 	global = (t_global *)data;
 	padding = WIDTH / THREAD;
-	start = get_thread_id(pthread_self(), global->thread) * padding;
+	start = get_thread_id(pthread_self(), global->thread) * (padding - 1);
 	end = start + padding;
 	while (++start < global->mandel.img_x && start + global->pos[1] < WIDTH \
 			&& start < end)
@@ -109,12 +107,19 @@ int		launch_draw(t_global *global)
 	pthread_create(&global->thread[1], NULL, mandelbrot, global);
 	pthread_create(&global->thread[2], NULL, mandelbrot, global);
 	pthread_create(&global->thread[3], NULL, mandelbrot, global);
+	pthread_create(&global->thread[4], NULL, mandelbrot, global);
+	pthread_create(&global->thread[5], NULL, mandelbrot, global);
+	pthread_create(&global->thread[6], NULL, mandelbrot, global);
+	pthread_create(&global->thread[7], NULL, mandelbrot, global);
 	pthread_join(global->thread[0], NULL);
 	pthread_join(global->thread[1], NULL);
 	pthread_join(global->thread[2], NULL);
 	pthread_join(global->thread[3], NULL);
+	pthread_join(global->thread[4], NULL);
+	pthread_join(global->thread[5], NULL);
+	pthread_join(global->thread[6], NULL);
+	pthread_join(global->thread[7], NULL);
 	mlx_put_image_to_window(global->img.p_mlx, global->img.p_win, \
 													global->img.p_img, 0, 0);
-	// mandelbrot(global);
 	return (0);
 }

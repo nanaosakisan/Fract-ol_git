@@ -47,7 +47,7 @@ int		iteration(t_global *global, int key)
 		return (0);
 	else
 	{
-		if (global->color.turn == 1)
+		if (global->color.turn == 2)
 			global->color.turn = 0;
 		else
 			global->color.turn += 1;

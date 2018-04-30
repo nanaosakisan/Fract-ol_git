@@ -32,11 +32,8 @@ static void	init_mandel(t_global *global)
 	global->mandel.img_x = 0;
 	global->mandel.zoom_x = 0;
 	global->mandel.zoom_y = 0;
-	global->mandel.c_r = 0;
-	global->mandel.c_i = 0;
 	global->zoom = 300;
 	global->iter_max = 50;
-	pthread_mutex_init(&global->mandel.mutex, NULL);
 }
 
 static void init_tmp(t_global *global)
@@ -53,11 +50,14 @@ static void	init_color(t_color *color)
 {
 	color->turn = 0;
 	color->color[0][0] = 0x000000;
-	color->color[0][1] = 0xFE93FF;
+	color->color[0][1] = 0xFD00FF;
 	color->color[0][2] = 0xFFFFFF;
 	color->color[1][0] = 0x000000;
-	color->color[1][1] = 0x0000FF;
+	color->color[1][1] = 0x00f9ff;
 	color->color[1][2] = 0xFFFFFF;
+	color->color[2][0] = 0x000000;
+	color->color[2][1] = 0xFFD700;
+	color->color[2][2] = 0xFFFFFF;
 }
 
 void		init_global(t_global *global)
@@ -69,7 +69,7 @@ void		init_global(t_global *global)
 	global->function[3] = &move_right_and_left;
 	global->function[4] = &init_map;
 	global->function[5] = &iteration;
-	global->function[5] = &switch_color;
+	global->function[6] = &switch_color;
 	global->len_function = 7;
 	global->mouse_func[0] = &pointed_zoom;
 	global->len_mouse = 1;
@@ -81,6 +81,10 @@ void		init_global(t_global *global)
 	global->thread[1] = 0;
 	global->thread[2] = 0;
 	global->thread[3] = 0;
+	global->thread[4] = 0;
+	global->thread[5] = 0;
+	global->thread[6] = 0;
+	global->thread[7] = 0;
 	init_img(&global->img);
 	init_mandel(global);
 	init_color(&global->color);
