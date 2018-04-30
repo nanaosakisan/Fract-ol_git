@@ -21,6 +21,7 @@
 
 # define HEIGHT 800
 # define WIDTH 800
+# define THREAD 1
 
 typedef	struct	s_img
 {
@@ -35,16 +36,17 @@ typedef	struct	s_img
 
 typedef struct	s_mandelbrot
 {
-	long double	y1;
-	long double y2;
-	long double	x1;
-	long double	x2;
-	long double	img_x;
-	long double	img_y;
-	long double	zoom_x;
-	long double	zoom_y;
-	long double	c_r;
-	long double	c_i;
+	long double		y1;
+	long double		y2;
+	long double		x1;
+	long double		x2;
+	long double		img_x;
+	long double		img_y;
+	long double		zoom_x;
+	long double		zoom_y;
+	long double		c_r;
+	long double		c_i;
+	pthread_mutex_t	mutex;
 }				t_mandel;
 
 typedef struct	s_tmp
@@ -57,22 +59,28 @@ typedef struct	s_tmp
 	long double	x2;
 }				t_tmp;
 
+typedef	struct	s_color
+{
+	int		color[2][3];
+	int		turn;
+}				t_color;
+
 typedef struct	s_global
 {
 	char		*name;
 	t_img		img;
 	t_mandel	mandel;
 	t_tmp		tmp;
-	int			(*function[6]) (struct s_global*, int);
+	t_color		color;
+	int			(*function[7]) (struct s_global*, int);
 	int			(*mouse_func[1]) (int, int, int, struct s_global*);
-	int			len_array;
+	int			len_function;
 	int			len_mouse;
 	int			zoom;
 	int			iter_max;
 	int			pos[2];
 	int 		move[2];
-	int			color1[3];
-	int			switch_color;
+	pthread_t	thread[4];
 }				t_global;
 
 int			close_map(t_global *global, int key);
@@ -89,6 +97,7 @@ int			mouse_hook(int key, int x, int y, t_global *global);
 int			move_right_and_left(t_global *global, int key);
 int			move_up_and_down(t_global *global, int key);
 int			pointed_zoom(int key, int x, int y, t_global *global);
+int			switch_color(t_global *global, int key);
 int			zoom(t_global *global, int key);
 
 # endif

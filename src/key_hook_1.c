@@ -45,10 +45,6 @@ int		init_map(t_global *global, int key)
 	global->move[0] = 0;
 	global->move[1] = 0;
 	global->iter_max = global->tmp.iter_max;
-	// global->mandel.y1 = global->tmp.y1;
-	// global->mandel.y2 = global->tmp.y2;
-	// global->mandel.x1 = global->tmp.x1;
-	// global->mandel.x2 = global->tmp.x2;
 	global->zoom = global->tmp.zoom;
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
@@ -60,6 +56,7 @@ int		close_map(t_global *global, int key)
 	if (key != 53)
 		return (0);
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
+	pthread_mutex_destroy(&global->mandel.mutex);
 	global->img.p_mlx = NULL;
 	global->img.p_win = NULL;
 	global->img.p_img = NULL;
@@ -72,7 +69,7 @@ int		deal_key(int key, t_global *global)
 	int i;
 
 	i = 0;
-	while ((i < global->len_array) && !global->function[i](global, key))
+	while ((i < global->len_function) && !global->function[i](global, key))
 		i++;
 	return (0);
 }

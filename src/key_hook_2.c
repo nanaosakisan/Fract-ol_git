@@ -12,32 +12,20 @@
 
 #include "../includes/fractol.h"
 
-int				zoom(t_global *global, int key)
+int		zoom(t_global *global, int key)
 {
 	if (key != 69 && key != 78)
 		return (0);
 	else if (key == 69)
-	{
 		global->zoom += 10;
-		// global->mandel.y1 += 0.10;
-		// global->mandel.y2 -= 0.10;
-		// global->mandel.x1 += 0.10;
-		// global->mandel.x2 -= 0.10;
-	}
 	else if (key == 78)
-	{
 		global->zoom -= 10;
-		// global->mandel.y1 -= 0.10;
-		// global->mandel.y2 += 0.10;
-		// global->mandel.x1 -= 0.10;
-		// global->mandel.x2 += 0.10;
-	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);
 }
 
-int				iteration(t_global *global, int key)
+int		iteration(t_global *global, int key)
 {
 	if (key != 116 && key != 121)
 		return (0);
@@ -47,6 +35,22 @@ int				iteration(t_global *global, int key)
 	{
 		if (global->iter_max > 20)
 			global->iter_max -= 10;
+	}
+	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
+	launch_draw(global);
+	return (1);
+}
+
+	int		switch_color(t_global *global, int key)
+{
+	if (key != 256)
+		return (0);
+	else
+	{
+		if (global->color.turn == 1)
+			global->color.turn = 0;
+		else
+			global->color.turn += 1;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
