@@ -22,7 +22,6 @@
 # define HEIGHT 800
 # define WIDTH 800
 # define THREAD 16
-
 typedef	struct	s_img
 {
 	void	*p_mlx;
@@ -76,13 +75,13 @@ typedef struct	s_global
 	int			zoom;
 	int			iter_max;
 	int			pos[2];
-	int 		move[2];
+	long double	move[2];
 	pthread_t	thread[THREAD];
 }				t_global;
 
 int			close_map(t_global *global, int key);
+void		color(t_global *global, int x, int y, int i);
 int			deal_key(int key, t_global *global);
-int			display_color(t_global *global, int i, int color1, int color2);
 void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
 void		init_global(t_global *global);
 int			init_map(t_global *global, int key);

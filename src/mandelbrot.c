@@ -28,22 +28,6 @@ static int	get_thread_id(pthread_t id, pthread_t *thread)
 	return (i);
 }
 
-static void	color(t_global *global, int x, int y, int i)
-{
-
-	if (i == global->iter_max)
-		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
-																	0x000000);
-	else if (i < global->iter_max / 2 - 1)
-		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
-		display_color(global, i, global->color.color[global->color.turn][0], \
-									global->color.color[global->color.turn][1]));
-	else if (i > global->iter_max / 2 && i < global->iter_max - 1)
-		mlx_pixel_put_to_image(global, x + global->pos[1], y + global->pos[0], \
-		display_color(global, i, global->color.color[global->color.turn][1], \
-								global->color.color[global->color.turn][2]));
-}
-
 static int	algorithm(int x, int y, t_global *global)
 {
 	int			i;
@@ -79,12 +63,11 @@ static void	*mandelbrot(void *data)
 	padding = WIDTH / THREAD;
 	start = get_thread_id(pthread_self(), global->thread) * (padding - 1);
 	end = start + padding;
-	while (++start < global->mandel.img_x && start + global->pos[1] < WIDTH \
-			&& start < end)
+	while (++start < global->mandel.img_x && start + global->move[1] < WIDTH && start < end)
 	{
 		i = -1;
-		while (++i < global->mandel.img_y && i + global->pos[0] < HEIGHT)
-			algorithm(start, i, global);
+		while (++i + global->move[0] < global->mandel.img_y && i < HEIGHT)
+			algorithm(start + global->pos[1], i + global->pos[0], global);
 	}
 	return (NULL);
 }

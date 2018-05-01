@@ -46,6 +46,8 @@ int		init_map(t_global *global, int key)
 	global->move[1] = 0;
 	global->iter_max = global->tmp.iter_max;
 	global->zoom = global->tmp.zoom;
+	global->pos[0] = 0;
+	global->pos[1] = 0;
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);
