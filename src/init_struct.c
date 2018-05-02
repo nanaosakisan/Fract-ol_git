@@ -24,7 +24,7 @@ static void	init_img(t_img *img)
 
 static void	init_mandel(t_global *global)
 {
-	global->mandel.y1 = -1.2;
+	global->mandel.y1 = -1.3;
 	global->mandel.y2 = 1.2;
 	global->mandel.x1 = -2.1;
 	global->mandel.x2 = 0.6;
@@ -76,10 +76,6 @@ void		init_global(t_global *global)
 	global->len_function = 7;
 	global->mouse_func[0] = &pointed_zoom;
 	global->len_mouse = 1;
-	global->pos[0] = 0;
-	global->pos[1] = 0;
-	global->move[0] = 0;
-	global->move[1] = 0;
 	while (++i < THREAD)
 		global->thread[i] = 0;
 	init_img(&global->img);

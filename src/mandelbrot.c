@@ -12,12 +12,6 @@
 
 #include "../includes/fractol.h"
 
-static void	init_pos(t_global *global)
-{
-	global->pos[0] = (HEIGHT / 2 - global->mandel.img_y / 2) + global->move[0];
-	global->pos[1] = (WIDTH / 2 - global->mandel.img_x / 2) + global->move[1];
-}
-
 static int	get_thread_id(pthread_t id, pthread_t *thread)
 {
 	int i;
@@ -36,6 +30,7 @@ static int	algorithm(int x, int y, t_global *global)
 	long double	tmp;
 
 	i = 0;
+
 	c[0] = (x / global->mandel.zoom_x + global->mandel.x1);
 	c[1] = (y / global->mandel.zoom_y + global->mandel.y1);
 	z[0] = 0;
@@ -61,13 +56,13 @@ static void	*mandelbrot(void *data)
 
 	global = (t_global *)data;
 	padding = WIDTH / THREAD;
-	start = get_thread_id(pthread_self(), global->thread) * (padding - 1);
-	end = start + padding;
-	while (++start < global->mandel.img_x && start + global->move[1] < WIDTH && start < end)
+	start = get_thread_id(pthread_self(), global->thread) * (padding);
+	end = start + padding + 1;
+	while (++start < WIDTH && start < end)
 	{
 		i = -1;
-		while (++i + global->move[0] < global->mandel.img_y && i < HEIGHT)
-			algorithm(start + global->pos[1], i + global->pos[0], global);
+		while (++i < HEIGHT)
+			algorithm(start, i, global);
 	}
 	return (NULL);
 }
@@ -87,7 +82,6 @@ int		launch_draw(t_global *global)
 															global->mandel.x1);
 	global->mandel.zoom_y = global->mandel.img_y / (global->mandel.y2 - \
 															global->mandel.y1);
-	init_pos(global);
 	i = -1;
 	while (++i < THREAD)
 		pthread_create(&global->thread[i], NULL, mandelbrot, global);

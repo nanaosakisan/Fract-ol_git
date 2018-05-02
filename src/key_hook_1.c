@@ -17,9 +17,15 @@ int		move_up_and_down(t_global *global, int key)
 	if (key != 125 && key != 126)
 		return (0);
 	else if (key == 126)
-			global->move[0] -= 10;
+	{
+		global->mandel.y1 += 0.5;
+		global->mandel.y2 += 0.5;
+	}
 	else if (key == 125)
-		global->move[0] += 10;
+	{
+		global->mandel.y1 -= 0.1;
+		global->mandel.y2 -= 0.1;
+	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);
@@ -30,9 +36,15 @@ int		move_right_and_left(t_global *global, int key)
 	if (key != 124 && key != 123)
 		return (0);
 	else if (key == 124)
-		global->move[1] += 10;
+	{
+		global->mandel.x1 -= 0.1;
+		global->mandel.x2 -= 0.1;
+	}
 	else if (key == 123)
-		global->move[1] -= 10;
+	{
+		global->mandel.x1 += 0.1;
+		global->mandel.x2 += 0.1;
+	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);
@@ -42,12 +54,12 @@ int		init_map(t_global *global, int key)
 {
 	if (key != 82)
 		return (0);
-	global->move[0] = 0;
-	global->move[1] = 0;
 	global->iter_max = global->tmp.iter_max;
 	global->zoom = global->tmp.zoom;
-	global->pos[0] = 0;
-	global->pos[1] = 0;
+	global->mandel.x1 = global->tmp.x1;
+	global->mandel.y1 = global->tmp.y1;
+	global->mandel.x2 = global->tmp.x2;
+	global->mandel.y2 = global->tmp.y2;
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);

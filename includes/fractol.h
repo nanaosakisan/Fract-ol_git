@@ -47,8 +47,8 @@ typedef struct	s_mandelbrot
 
 typedef struct	s_tmp
 {
-	int iter_max;
-	int zoom;
+	int 		iter_max;
+	int 		zoom;
 	long double	y1;
 	long double	y2;
 	long double	x1;
@@ -74,8 +74,6 @@ typedef struct	s_global
 	int			len_mouse;
 	int			zoom;
 	int			iter_max;
-	int			pos[2];
-	long double	move[2];
 	pthread_t	thread[THREAD];
 }				t_global;
 

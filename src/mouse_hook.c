@@ -14,22 +14,17 @@
 
 int		pointed_zoom(int key, int x, int y, t_global *global)
 {
-	int tmp_y;
-	int tmp_x;
-
-	tmp_x = x - global->pos[1];
-	tmp_y = y - global->pos[0];
-	printf("1 -> pos[0] = %d; pos[1] = %d\n", global->pos[0], global->pos[1]);
-	printf("1 -> y = %d, x = %d\n", y, x);
 	if (key != 1 && key != 2 && !x && !y)
 		return (0);
 	else if (key == 1)
 	{
-		global->move[1] += (tmp_x - global->mandel.img_x / 2) / global->zoom;
-		global->move[0] += (tmp_y - global->mandel.img_y / 2) / global->zoom;
-		global->zoom *= 1.25;
-		global->move[1] -= (tmp_x - global->mandel.img_x / 2) / global->zoom;
-		global->move[0] -= (tmp_y - global->mandel.img_y / 2) / global->zoom;
+		global->mandel.x2 = x;
+		global->mandel.y2 = y;
+		global->mandel.x1 = (x / global->zoom + global->mandel.x1) - ((global->zoom * 1.3) / 2);
+		global->mandel.x1 += ((global->zoom * 1.3) / 2) - (x / (global->zoom * 1.3));
+		global->mandel.y1 = (y / global->zoom + global->mandel.y1) - ((global->zoom * 1.3) / 2);
+		global->mandel.y1 += ((global->zoom * 1.3) / 2) - (y / (global->zoom * 1.3));
+		global->zoom *= 1.3;
 	}
 	else if (key == 2)
 		global->zoom -= 10;
@@ -47,3 +42,11 @@ int		mouse_hook(int key, int x, int y, t_global *global)
 		i++;
 	return (0);
 }
+// data->x2 = x;
+// data->y2 = y;
+// data->x1 = (x / data->zoom + data->x1) - ((data->zoom * 1.3) / 2);
+// data->x1 += ((data->zoom * 1.3) / 2) - (x / (data->zoom * 1.3));
+// data->y1 = (y / data->zoom + data->y1) - ((data->zoom * 1.3) / 2);
+// data->y1 += ((data->zoom * 1.3) / 2) - (y / (data->zoom * 1.3));
+// data->zoom *= 1.3;
+// data->it_max++;
