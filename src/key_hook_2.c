@@ -12,29 +12,16 @@
 
 #include "../includes/fractol.h"
 
-int		zoom(t_global *global, int key)
-{
-	if (key != 69 && key != 78)
-		return (0);
-	else if (key == 69)
-		global->zoom += 10;
-	else if (key == 78)
-		global->zoom -= 10;
-	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	launch_draw(global);
-	return (1);
-}
-
 int		iteration(t_global *global, int key)
 {
 	if (key != 116 && key != 121)
 		return (0);
 	else if (key == 116)
-		global->iter_max += 10;
+		global->iter_max += 1;
 	else if (key == 121)
 	{
-		if (global->iter_max > 20)
-			global->iter_max -= 10;
+		if (global->iter_max > 2)
+			global->iter_max -= 1;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);

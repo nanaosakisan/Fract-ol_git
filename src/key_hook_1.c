@@ -18,13 +18,13 @@ int		move_up_and_down(t_global *global, int key)
 		return (0);
 	else if (key == 126)
 	{
-		global->mandel.y1 += 0.5;
-		global->mandel.y2 += 0.5;
+		global->mandel.y1 += 1 / global->zoom * 10;
+		global->mandel.y2 += 1 / global->zoom * 10;
 	}
 	else if (key == 125)
 	{
-		global->mandel.y1 -= 0.1;
-		global->mandel.y2 -= 0.1;
+		global->mandel.y1 -= 1 / global->zoom * 10;
+		global->mandel.y2 -= 1 / global->zoom * 10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
@@ -37,13 +37,13 @@ int		move_right_and_left(t_global *global, int key)
 		return (0);
 	else if (key == 124)
 	{
-		global->mandel.x1 -= 0.1;
-		global->mandel.x2 -= 0.1;
+		global->mandel.x1 -= 1 / global->zoom * 10;
+		global->mandel.x2 -= 1 / global->zoom * 10;
 	}
 	else if (key == 123)
 	{
-		global->mandel.x1 += 0.1;
-		global->mandel.x2 += 0.1;
+		global->mandel.x1 += 1 / global->zoom * 10;
+		global->mandel.x2 += 1 / global->zoom * 10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);

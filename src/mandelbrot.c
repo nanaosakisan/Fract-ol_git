@@ -30,7 +30,6 @@ static int	algorithm(int x, int y, t_global *global)
 	long double	tmp;
 
 	i = 0;
-
 	c[0] = (x / global->mandel.zoom_x + global->mandel.x1);
 	c[1] = (y / global->mandel.zoom_y + global->mandel.y1);
 	z[0] = 0;
@@ -46,7 +45,7 @@ static int	algorithm(int x, int y, t_global *global)
 	return (0);
 }
 
-static void	*mandelbrot(void *data)
+static void	*launch_thread(void *data)
 {
 	int			start;
 	int			end;
@@ -56,7 +55,7 @@ static void	*mandelbrot(void *data)
 
 	global = (t_global *)data;
 	padding = WIDTH / THREAD;
-	start = get_thread_id(pthread_self(), global->thread) * (padding);
+	start = get_thread_id(pthread_self(), global->thread) * padding;
 	end = start + padding + 1;
 	while (++start < WIDTH && start < end)
 	{
@@ -84,7 +83,7 @@ int		launch_draw(t_global *global)
 															global->mandel.y1);
 	i = -1;
 	while (++i < THREAD)
-		pthread_create(&global->thread[i], NULL, mandelbrot, global);
+		pthread_create(&global->thread[i], NULL, launch_thread, global);
 	i = -1;
 	while (++i < THREAD)
 		pthread_join(global->thread[i], NULL);

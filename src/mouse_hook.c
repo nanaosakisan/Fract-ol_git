@@ -14,20 +14,37 @@
 
 int		pointed_zoom(int key, int x, int y, t_global *global)
 {
+	double tmp_x[2];
+	double tmp_y[2];
+
+	tmp_x[0] = global->mandel.x1 + x * (global->mandel.x2 - global->mandel.x1) \
+																		/ WIDTH;
+	tmp_y[0] = global->mandel.y1 + y * (global->mandel.y2 - global->mandel.y1) \
+																	/ HEIGHT;
+	tmp_x[1] = global->mandel.x1;
+	tmp_y[1] = global->mandel.y1;
 	if (key != 1 && key != 2 && !x && !y)
 		return (0);
 	else if (key == 1)
 	{
-		global->mandel.x2 = x;
-		global->mandel.y2 = y;
-		global->mandel.x1 = (x / global->zoom + global->mandel.x1) - ((global->zoom * 1.3) / 2);
-		global->mandel.x1 += ((global->zoom * 1.3) / 2) - (x / (global->zoom * 1.3));
-		global->mandel.y1 = (y / global->zoom + global->mandel.y1) - ((global->zoom * 1.3) / 2);
-		global->mandel.y1 += ((global->zoom * 1.3) / 2) - (y / (global->zoom * 1.3));
-		global->zoom *= 1.3;
+		global->zoom *= 1.5;
+		global->mandel.x1 = tmp_x[0] - (global->mandel.x2 - global->mandel.x1) \
+																			/ 3;
+		global->mandel.x2 = tmp_x[0] + (global->mandel.x2 - tmp_x[1]) / 3;
+		global->mandel.y1 = tmp_y[0] - (global->mandel.y2 - global->mandel.y1) \
+																			/ 3;
+		global->mandel.y2 = tmp_y[0] + (global->mandel.y2 - tmp_y[1]) / 3;
+		global->iter_max++;
 	}
 	else if (key == 2)
-		global->zoom -= 10;
+	{
+		global->zoom /= 1.5;
+		global->mandel.x1 = tmp_x[0] - (global->mandel.x2 - global->mandel.x1);
+		global->mandel.x2 = tmp_x[0] + (global->mandel.x2 - tmp_x[1]);
+		global->mandel.y1 = tmp_y[0] - (global->mandel.y2 - global->mandel.y1);
+		global->mandel.y2 = tmp_y[0] + (global->mandel.y2 - tmp_y[1]);
+		global->iter_max--;
+	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);
@@ -42,11 +59,3 @@ int		mouse_hook(int key, int x, int y, t_global *global)
 		i++;
 	return (0);
 }
-// data->x2 = x;
-// data->y2 = y;
-// data->x1 = (x / data->zoom + data->x1) - ((data->zoom * 1.3) / 2);
-// data->x1 += ((data->zoom * 1.3) / 2) - (x / (data->zoom * 1.3));
-// data->y1 = (y / data->zoom + data->y1) - ((data->zoom * 1.3) / 2);
-// data->y1 += ((data->zoom * 1.3) / 2) - (y / (data->zoom * 1.3));
-// data->zoom *= 1.3;
-// data->it_max++;

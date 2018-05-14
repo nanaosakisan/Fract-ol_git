@@ -31,6 +31,8 @@ static int	display_color(t_global *global, int i, int color1, int color2)
 	color |= tab2[0] << 16;
 	color |= tab2[1] << 8;
 	color |= tab2[2];
+	if (color == 0x000000)
+		printf("color1 = %d, color2 = %d, i = %d\n", color1, color2, i);
 	return (color);
 }
 
@@ -38,11 +40,11 @@ void		color(t_global *global, int x, int y, int i)
 {
 	if (i == global->iter_max)
 		mlx_pixel_put_to_image(global, x, y, 0x000000);
-	else if (i < global->iter_max / 2 - 1)
+	else if (i < global->iter_max / 2)
 		mlx_pixel_put_to_image(global, x, y, display_color(global, i, \
 								global->color.color[global->color.turn][0], \
 								global->color.color[global->color.turn][1]));
-	else if (i > global->iter_max / 2 && i < global->iter_max - 1)
+	else if (i >= global->iter_max / 2 && i <= global->iter_max - 1)
 		mlx_pixel_put_to_image(global, x, y, display_color(global, i, \
 								global->color.color[global->color.turn][1], \
 								global->color.color[global->color.turn][2]));

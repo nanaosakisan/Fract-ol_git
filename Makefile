@@ -15,6 +15,7 @@ NAME = fractol
 SRC_PATH = src/
 SRC_NAME =	display_color.c				\
 			init_struct.c				\
+			julia.c						\
 			key_hook_1.c				\
 			key_hook_2.c				\
 			main.c						\
