@@ -18,13 +18,13 @@ int		move_up_and_down(t_global *global, int key)
 		return (0);
 	else if (key == 126)
 	{
-		global->mandel.y1 += 1 / global->zoom * 10;
-		global->mandel.y2 += 1 / global->zoom * 10;
+		global->fract[global->index].y1 += 1 / global->zoom * 10;
+		global->fract[global->index].y2 += 1 / global->zoom * 10;
 	}
 	else if (key == 125)
 	{
-		global->mandel.y1 -= 1 / global->zoom * 10;
-		global->mandel.y2 -= 1 / global->zoom * 10;
+		global->fract[global->index].y1 -= 1 / global->zoom * 10;
+		global->fract[global->index].y2 -= 1 / global->zoom * 10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
@@ -37,13 +37,13 @@ int		move_right_and_left(t_global *global, int key)
 		return (0);
 	else if (key == 124)
 	{
-		global->mandel.x1 -= 1 / global->zoom * 10;
-		global->mandel.x2 -= 1 / global->zoom * 10;
+		global->fract[global->index].x1 -= 1 / global->zoom * 10;
+		global->fract[global->index].x2 -= 1 / global->zoom * 10;
 	}
 	else if (key == 123)
 	{
-		global->mandel.x1 += 1 / global->zoom * 10;
-		global->mandel.x2 += 1 / global->zoom * 10;
+		global->fract[global->index].x1 += 1 / global->zoom * 10;
+		global->fract[global->index].x2 += 1 / global->zoom * 10;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
@@ -56,10 +56,10 @@ int		init_map(t_global *global, int key)
 		return (0);
 	global->iter_max = global->tmp.iter_max;
 	global->zoom = global->tmp.zoom;
-	global->mandel.x1 = global->tmp.x1;
-	global->mandel.y1 = global->tmp.y1;
-	global->mandel.x2 = global->tmp.x2;
-	global->mandel.y2 = global->tmp.y2;
+	global->fract[global->index].x1 = global->tmp.x1;
+	global->fract[global->index].y1 = global->tmp.y1;
+	global->fract[global->index].x2 = global->tmp.x2;
+	global->fract[global->index].y2 = global->tmp.y2;
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	launch_draw(global);
 	return (1);

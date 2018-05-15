@@ -15,6 +15,7 @@
 int		main(int ac, char **av)
 {
 	t_global	global;
+	int			i;
 
 	if (ac != 2 || (ft_strcmp(av[1], "mandelbrot") != 0 && ft_strcmp(av[1], \
 		"julia") != 0 && ft_strcmp(av[1], "buh1") != 0 && ft_strcmp(av[1], \
@@ -23,26 +24,11 @@ int		main(int ac, char **av)
 	else if (ft_strcmp(av[1], "julia") == 0)
 	{
 		init_global(&global);
-		global.name = av[1];
-		global.img.p_mlx = mlx_init();
-		global.img.p_win = mlx_new_window(global.img.p_mlx, WIDTH, HEIGHT, \
-															global.name);
-		launch_draw_julia(&global);
-		mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
-		mlx_mouse_hook(global.img.p_win, mouse_hook, &global);
-		mlx_loop(global.img.p_mlx);
+		while (ft_strcmp(av[1], global-.fract[i].name) != 0)
+			i++;
+		global.name = global.fract[i].name;
+		global.index = 1;
+		select_fract(&global);
 	}
-	// else
-	// {
-	// 	init_global(&global);
-	// 	global.name = av[1];
-	// 	global.img.p_mlx = mlx_init();
-	// 	global.img.p_win = mlx_new_window(global.img.p_mlx, WIDTH, HEIGHT, \
-	// 														global.name);
-	// 	launch_draw(&global);
-	// 	mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
-	// 	mlx_mouse_hook(global.img.p_win, mouse_hook, &global);
-	// 	mlx_loop(global.img.p_mlx);
-	// }
 	return(0);
 }

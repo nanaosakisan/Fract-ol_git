@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   fract[global->index]brot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,8 +30,8 @@ static int	algorithm(int x, int y, t_global *global)
 	long double	tmp;
 
 	i = 0;
-	c[0] = (x / global->mandel.zoom_x + global->mandel.x1);
-	c[1] = (y / global->mandel.zoom_y + global->mandel.y1);
+	c[0] = (x / global->fract[global->index].zoom_x + global->fract[global->index].x1);
+	c[1] = (y / global->fract[global->index].zoom_y + global->fract[global->index].y1);
 	z[0] = 0;
 	z[1] = 0;
 	while ((z[0] * z[0] + z[1] * z[1] < 4) && i < global->iter_max)
@@ -73,14 +73,14 @@ int		launch_draw(t_global *global)
 	global->img.p_img = mlx_new_image(global->img.p_mlx, WIDTH, HEIGHT);
 	global->img.img_addr = mlx_get_data_addr(global->img.p_img, \
 					&global->img.bpp, &global->img.size, &global->img.endian);
-	global->mandel.img_y = (global->mandel.y2 - global->mandel.y1) * \
+	global->fract[global->index].img_y = (global->fract[global->index].y2 - global->fract[global->index].y1) * \
 																global->zoom;
-	global->mandel.img_x = (global->mandel.x2 - global->mandel.x1) * \
+	global->fract[global->index].img_x = (global->fract[global->index].x2 - global->fract[global->index].x1) * \
 																global->zoom;
-	global->mandel.zoom_x = global->mandel.img_x / (global->mandel.x2 - \
-															global->mandel.x1);
-	global->mandel.zoom_y = global->mandel.img_y / (global->mandel.y2 - \
-															global->mandel.y1);
+	global->fract[global->index].zoom_x = global->fract[global->index].img_x / (global->fract[global->index].x2 - \
+															global->fract[global->index].x1);
+	global->fract[global->index].zoom_y = global->fract[global->index].img_y / (global->fract[global->index].y2 - \
+															global->fract[global->index].y1);
 	i = -1;
 	while (++i < THREAD)
 		pthread_create(&global->thread[i], NULL, launch_thread, global);

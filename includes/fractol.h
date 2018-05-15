@@ -33,8 +33,9 @@ typedef	struct	s_img
 	int		endian;
 }				t_img;
 
-typedef struct	s_mandelbrot
+typedef struct	s_fract
 {
+	char			*name;
 	long double		y1;
 	long double		y2;
 	long double		x1;
@@ -43,20 +44,7 @@ typedef struct	s_mandelbrot
 	long double		img_y;
 	long double		zoom_x;
 	long double		zoom_y;
-}				t_mandel;
-
-typedef	struct	s_julia
-{
-	long double		y1;
-	long double		y2;
-	long double		x1;
-	long double		x2;
-	long double		img_x;
-	long double		img_y;
-	long double		zoom_x;
-	long double		zoom_y;
-	int				iter_max;
-}				t_julia;
+}				t_fract;
 
 typedef struct	s_tmp
 {
@@ -76,19 +64,19 @@ typedef	struct	s_color
 
 typedef struct	s_global
 {
-	char		*name;
-	t_img		img;
-	t_mandel	mandel;
-	t_julia		julia;
-	t_tmp		tmp;
-	t_color		color;
-	int			(*function[6]) (struct s_global*, int);
-	int			(*mouse_func[1]) (int, int, int, struct s_global*);
-	int			len_function;
-	int			len_mouse;
-	long double	zoom;
-	int			iter_max;
-	pthread_t	thread[THREAD];
+	char			*name;
+	int				index;
+	t_img			img;
+	struct s_fract	fract[2];
+	t_tmp			tmp;
+	t_color			color;
+	int				(*function[6]) (struct s_global*, int);
+	int				(*mouse_func[1]) (int, int, int, struct s_global*);
+	int				len_function;
+	int				len_mouse;
+	long double		zoom;
+	int				iter_max;
+	pthread_t		thread[THREAD];
 }				t_global;
 
 int			close_map(t_global *global, int key);
@@ -101,7 +89,6 @@ int			iteration(t_global *global, int key);
 int			launch_draw(t_global *global);
 int			launch_draw_julia(t_global *global);
 int			main(int ac, char **av);
-void		mlx_pixel_put_to_image(t_global *dna, int x, int y, int color);
 int			mouse_hook(int key, int x, int y, t_global *global);
 int			move_right_and_left(t_global *global, int key);
 int			move_up_and_down(t_global *global, int key);

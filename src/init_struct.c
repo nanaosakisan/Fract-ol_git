@@ -22,30 +22,32 @@ static void	init_img(t_img *img)
 	img->endian = 0;
 }
 
-// static void	init_mandel(t_global *global)
-// {
-// 	global->mandel.y1 = -1.3;
-// 	global->mandel.y2 = 1.2;
-// 	global->mandel.x1 = -2.1;
-// 	global->mandel.x2 = 0.6;
-// 	global->mandel.img_y = 0;
-// 	global->mandel.img_x = 0;
-// 	global->mandel.zoom_x = 0;
-// 	global->mandel.zoom_y = 0;
-// 	global->zoom = 300;
-// 	global->iter_max = 50;
-// }
+static void	init_mandel(t_global *global)
+{
+	global->fract[0].name = "mandelbrot";
+	global->fract[0].y1 = -1.3;
+	global->fract[0].y2 = 1.2;
+	global->fract[0].x1 = -2.1;
+	global->fract[0].x2 = 0.6;
+	global->fract[0].img_y = 0;
+	global->fract[0].img_x = 0;
+	global->fract[0].zoom_x = 0;
+	global->fract[0].zoom_y = 0;
+	global->zoom = 300;
+	global->iter_max = 50;
+}
 
 static void	init_julia(t_global *global)
 {
-	global->julia.y1 = -1.2;
-	global->julia.y2 = 1.2;
-	global->julia.x1 = -1;
-	global->julia.x2 = 1;
-	global->julia.img_y = 0;
-	global->julia.img_x = 0;
-	global->julia.zoom_x = 0;
-	global->julia.zoom_y = 0;
+	global->fract[0].name = "julia";
+	global->fract[1].y1 = -1.2;
+	global->fract[1].y2 = 1.2;
+	global->fract[1].x1 = -1;
+	global->fract[1].x2 = 1;
+	global->fract[1].img_y = 0;
+	global->fract[1].img_x = 0;
+	global->fract[1].zoom_x = 0;
+	global->fract[1].zoom_y = 0;
 	global->zoom = 300;
 	global->iter_max = 150;
 }
@@ -54,10 +56,10 @@ static void init_tmp(t_global *global)
 {
 	global->tmp.iter_max = global->iter_max;
 	global->tmp.zoom = global->zoom;
-	global->tmp.y1 = global->mandel.y1;
-	global->tmp.y2 = global->mandel.y2;
-	global->tmp.x1 = global->mandel.x1;
-	global->tmp.x2 = global->mandel.x2;
+	global->tmp.y1 = global->fract[global->index].y1;
+	global->tmp.y2 = global->fract[global->index].y2;
+	global->tmp.x1 = global->fract[global->index].x1;
+	global->tmp.x2 = global->fract[global->index].x2;
 }
 
 static void	init_color(t_color *color)
@@ -80,6 +82,7 @@ void		init_global(t_global *global)
 
 	i = -1;
 	global->name = NULL;
+	global->index = 0;
 	global->function[0] = &close_map;
 	global->function[1] = &move_up_and_down;
 	global->function[2] = &move_right_and_left;
@@ -92,7 +95,7 @@ void		init_global(t_global *global)
 	while (++i < THREAD)
 		global->thread[i] = 0;
 	init_img(&global->img);
-	// init_mandel(global);
+	init_mandel(global);
 	init_julia(global);
 	init_color(&global->color);
 	init_tmp(global);
