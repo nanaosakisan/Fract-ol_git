@@ -24,11 +24,14 @@ int		main(int ac, char **av)
 	else if (ft_strcmp(av[1], "julia") == 0)
 	{
 		init_global(&global);
-		while (ft_strcmp(av[1], global-.fract[i].name) != 0)
+		while (ft_strcmp(av[1], global.fract[i].name) != 0)
 			i++;
 		global.name = global.fract[i].name;
-		global.index = 1;
+		global.id = i;
 		select_fract(&global);
+		mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
+		mlx_mouse_hook(global.img.p_win, mouse_hook, &global);
+		mlx_loop(global.img.p_mlx);
 	}
 	return(0);
 }

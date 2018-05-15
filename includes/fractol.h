@@ -65,7 +65,7 @@ typedef	struct	s_color
 typedef struct	s_global
 {
 	char			*name;
-	int				index;
+	int				id;
 	t_img			img;
 	struct s_fract	fract[2];
 	t_tmp			tmp;
@@ -86,9 +86,10 @@ void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
 void		init_global(t_global *global);
 int			init_map(t_global *global, int key);
 int			iteration(t_global *global, int key);
-int			launch_draw(t_global *global);
-int			launch_draw_julia(t_global *global);
+int			select_fract(t_global *global);
+int			julia(t_global *global);
 int			main(int ac, char **av);
+int			mandel(t_global *global);
 int			mouse_hook(int key, int x, int y, t_global *global);
 int			move_right_and_left(t_global *global, int key);
 int			move_up_and_down(t_global *global, int key);

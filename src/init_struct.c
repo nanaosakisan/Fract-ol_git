@@ -56,10 +56,10 @@ static void init_tmp(t_global *global)
 {
 	global->tmp.iter_max = global->iter_max;
 	global->tmp.zoom = global->zoom;
-	global->tmp.y1 = global->fract[global->index].y1;
-	global->tmp.y2 = global->fract[global->index].y2;
-	global->tmp.x1 = global->fract[global->index].x1;
-	global->tmp.x2 = global->fract[global->index].x2;
+	global->tmp.y1 = global->fract[global->id].y1;
+	global->tmp.y2 = global->fract[global->id].y2;
+	global->tmp.x1 = global->fract[global->id].x1;
+	global->tmp.x2 = global->fract[global->id].x2;
 }
 
 static void	init_color(t_color *color)
@@ -82,7 +82,7 @@ void		init_global(t_global *global)
 
 	i = -1;
 	global->name = NULL;
-	global->index = 0;
+	global->id = 0;
 	global->function[0] = &close_map;
 	global->function[1] = &move_up_and_down;
 	global->function[2] = &move_right_and_left;

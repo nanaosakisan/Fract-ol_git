@@ -24,7 +24,7 @@ int		iteration(t_global *global, int key)
 			global->iter_max -= 1;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	launch_draw(global);
+	select_fract(global);
 	return (1);
 }
 
@@ -40,6 +40,6 @@ int		iteration(t_global *global, int key)
 			global->color.turn += 1;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	launch_draw(global);
+	select_fract(global);
 	return (1);
 }

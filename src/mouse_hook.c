@@ -17,36 +17,36 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 	double tmp_x[2];
 	double tmp_y[2];
 
-	tmp_x[0] = global->fract[global->index].x1 + x * (global->fract[global->index].x2 - global->fract[global->index].x1) \
+	tmp_x[0] = global->fract[global->id].x1 + x * (global->fract[global->id].x2 - global->fract[global->id].x1) \
 																		/ WIDTH;
-	tmp_y[0] = global->fract[global->index].y1 + y * (global->fract[global->index].y2 - global->fract[global->index].y1) \
+	tmp_y[0] = global->fract[global->id].y1 + y * (global->fract[global->id].y2 - global->fract[global->id].y1) \
 																	/ HEIGHT;
-	tmp_x[1] = global->fract[global->index].x1;
-	tmp_y[1] = global->fract[global->index].y1;
+	tmp_x[1] = global->fract[global->id].x1;
+	tmp_y[1] = global->fract[global->id].y1;
 	if (key != 1 && key != 2 && !x && !y)
 		return (0);
 	else if (key == 1)
 	{
 		global->zoom *= 1.5;
-		global->fract[global->index].x1 = tmp_x[0] - (global->fract[global->index].x2 - global->fract[global->index].x1) \
+		global->fract[global->id].x1 = tmp_x[0] - (global->fract[global->id].x2 - global->fract[global->id].x1) \
 																			/ 3;
-		global->fract[global->index].x2 = tmp_x[0] + (global->fract[global->index].x2 - tmp_x[1]) / 3;
-		global->fract[global->index].y1 = tmp_y[0] - (global->fract[global->index].y2 - global->fract[global->index].y1) \
+		global->fract[global->id].x2 = tmp_x[0] + (global->fract[global->id].x2 - tmp_x[1]) / 3;
+		global->fract[global->id].y1 = tmp_y[0] - (global->fract[global->id].y2 - global->fract[global->id].y1) \
 																			/ 3;
-		global->fract[global->index].y2 = tmp_y[0] + (global->fract[global->index].y2 - tmp_y[1]) / 3;
+		global->fract[global->id].y2 = tmp_y[0] + (global->fract[global->id].y2 - tmp_y[1]) / 3;
 		global->iter_max++;
 	}
 	else if (key == 2)
 	{
 		global->zoom /= 1.5;
-		global->fract[global->index].x1 = tmp_x[0] - (global->fract[global->index].x2 - global->fract[global->index].x1);
-		global->fract[global->index].x2 = tmp_x[0] + (global->fract[global->index].x2 - tmp_x[1]);
-		global->fract[global->index].y1 = tmp_y[0] - (global->fract[global->index].y2 - global->fract[global->index].y1);
-		global->fract[global->index].y2 = tmp_y[0] + (global->fract[global->index].y2 - tmp_y[1]);
+		global->fract[global->id].x1 = tmp_x[0] - (global->fract[global->id].x2 - global->fract[global->id].x1);
+		global->fract[global->id].x2 = tmp_x[0] + (global->fract[global->id].x2 - tmp_x[1]);
+		global->fract[global->id].y1 = tmp_y[0] - (global->fract[global->id].y2 - global->fract[global->id].y1);
+		global->fract[global->id].y2 = tmp_y[0] + (global->fract[global->id].y2 - tmp_y[1]);
 		global->iter_max--;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
-	launch_draw(global);
+	select_fract(global);
 	return (1);
 }
 
