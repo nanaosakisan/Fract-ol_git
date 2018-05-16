@@ -42,8 +42,7 @@ static void	*launch_thread(void *data)
 	{
 		i = -1;
 		while (++i < HEIGHT && i < global->fract[global->id].img_y)
-			launch_fractal	// fonction de la fractal dans tableau de pointeur
-							// sur fonction vers toutes les fonctions de fractale;
+			global->fract[global->id].function(x, y, global);
 	}
 	return (NULL);
 }

@@ -82,7 +82,7 @@ int		deal_key(int key, t_global *global)
 	int i;
 
 	i = 0;
-	while ((i < global->len_function) && !global->function[i](global, key))
+	while ((i < global->len_key) && !global->key_func[i](global, key))
 		i++;
 	return (0);
 }
