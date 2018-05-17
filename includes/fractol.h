@@ -21,7 +21,7 @@
 
 # define HEIGHT 800
 # define WIDTH 800
-# define THREAD 1
+# define THREAD 8
 typedef	struct	s_img
 {
 	void	*p_mlx;
@@ -58,7 +58,7 @@ typedef struct	s_tmp
 
 typedef	struct	s_color
 {
-	int		color[3][3];
+	int		color[3][4];
 	int		turn;
 }				t_color;
 
@@ -70,7 +70,7 @@ typedef struct	s_global
 	struct s_fract	fract[2];
 	t_tmp			tmp;
 	t_color			color;
-	int 			(*function[2])(int, int, struct s_global*);
+	int 			(*function[3])(int, int, struct s_global*);
 	int				(*key_func[6]) (struct s_global*, int);
 	int				(*mouse_func[1]) (int, int, int, struct s_global*);
 	int				len_key;
@@ -86,6 +86,7 @@ int			deal_key(int key, t_global *global);
 void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
 void		init_global(t_global *global);
 int			init_map(t_global *global, int key);
+void 		init_tmp(t_global *global);
 int			iteration(t_global *global, int key);
 int			select_fract(t_global *global);
 int			julia(int x, int y, t_global *global);
@@ -98,6 +99,7 @@ int			move_up_and_down(t_global *global, int key);
 int			pointed_zoom(int key, int x, int y, t_global *global);
 int			select_fract(t_global *global);
 int			switch_color(t_global *global, int key);
+int			tricorn(int x, int y, t_global *global);
 int			zoom(t_global *global, int key);
 
 # endif

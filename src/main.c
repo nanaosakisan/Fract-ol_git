@@ -19,9 +19,9 @@ int		main(int ac, char **av)
 
 	i = 0;
 	if (ac != 2 || (ft_strcmp(av[1], "mandelbrot") != 0 && ft_strcmp(av[1], \
-		"julia") != 0 && ft_strcmp(av[1], "buh1") != 0 && ft_strcmp(av[1], \
+		"julia") != 0 && ft_strcmp(av[1], "tricorn") != 0 && ft_strcmp(av[1], \
 		"buh2") != 0 && ft_strcmp(av[1], "buh3") != 0))
-		error("usage: ./factol mandelbrot/julia");
+		error("usage: ./factol mandelbrot/julia/tricorn");
 	else
 	{
 		init_global(&global);
@@ -29,6 +29,7 @@ int		main(int ac, char **av)
 			i++;
 		global.name = global.fract[i].name;
 		global.id = i;
+		init_tmp(&global);
 		select_fract(&global);
 		mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
 		mlx_mouse_hook(global.img.p_win, mouse_hook, &global);
