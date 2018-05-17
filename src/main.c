@@ -17,11 +17,12 @@ int		main(int ac, char **av)
 	t_global	global;
 	int			i;
 
+	i = 0;
 	if (ac != 2 || (ft_strcmp(av[1], "mandelbrot") != 0 && ft_strcmp(av[1], \
 		"julia") != 0 && ft_strcmp(av[1], "buh1") != 0 && ft_strcmp(av[1], \
 		"buh2") != 0 && ft_strcmp(av[1], "buh3") != 0))
 		error("usage: ./factol mandelbrot/julia");
-	else if (ft_strcmp(av[1], "julia") == 0)
+	else
 	{
 		init_global(&global);
 		while (ft_strcmp(av[1], global.fract[i].name) != 0)

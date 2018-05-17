@@ -33,8 +33,6 @@ int					error(char *str);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 int					count_word(const char *s, char c);
-void				draw_segment(float *coord_src, float *coord_dst, \
-															t_global *global)
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
@@ -94,7 +92,5 @@ char				*ft_strtrim(const char *s);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					get_next_line(const int fd, char **line);
-void				mlx_pixel_put_to_image(t_global *global, int x, int y, \
-																	int color)
 
 #endif

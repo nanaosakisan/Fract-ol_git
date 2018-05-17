@@ -25,7 +25,6 @@ static void	init_img(t_img *img)
 static void	init_mandel(t_global *global)
 {
 	global->fract[0].name = "mandelbrot";
-	global->fract[0].function = &mandel;
 	global->fract[0].y1 = -1.3;
 	global->fract[0].y2 = 1.2;
 	global->fract[0].x1 = -2.1;
@@ -40,8 +39,7 @@ static void	init_mandel(t_global *global)
 
 static void	init_julia(t_global *global)
 {
-	global->fract[0].name = "julia";
-	global->fract[0].function = &julia;
+	global->fract[1].name = "julia";
 	global->fract[1].y1 = -1.2;
 	global->fract[1].y2 = 1.2;
 	global->fract[1].x1 = -1;
@@ -85,6 +83,8 @@ void		init_global(t_global *global)
 	i = -1;
 	global->name = NULL;
 	global->id = 0;
+	global->function[0] = &mandel;
+	global->function[1] = &julia;
 	global->key_func[0] = &close_map;
 	global->key_func[1] = &move_up_and_down;
 	global->key_func[2] = &move_right_and_left;

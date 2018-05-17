@@ -36,7 +36,6 @@ typedef	struct	s_img
 typedef struct	s_fract
 {
 	char			*name;
-	int 			(*function)(int, int, struct s_global*);
 	long double		y1;
 	long double		y2;
 	long double		x1;
@@ -71,6 +70,7 @@ typedef struct	s_global
 	struct s_fract	fract[2];
 	t_tmp			tmp;
 	t_color			color;
+	int 			(*function[2])(int, int, struct s_global*);
 	int				(*key_func[6]) (struct s_global*, int);
 	int				(*mouse_func[1]) (int, int, int, struct s_global*);
 	int				len_key;
@@ -88,13 +88,15 @@ void		init_global(t_global *global);
 int			init_map(t_global *global, int key);
 int			iteration(t_global *global, int key);
 int			select_fract(t_global *global);
-int			julia(t_global *global);
+int			julia(int x, int y, t_global *global);
 int			main(int ac, char **av);
-int			mandel(int x; int y, t_global *global);
+int			mandel(int x, int y, t_global *global);
+void		mlx_pixel_put_to_image(t_global *global, int x, int y, int color);
 int			mouse_hook(int key, int x, int y, t_global *global);
 int			move_right_and_left(t_global *global, int key);
 int			move_up_and_down(t_global *global, int key);
 int			pointed_zoom(int key, int x, int y, t_global *global);
+int			select_fract(t_global *global);
 int			switch_color(t_global *global, int key);
 int			zoom(t_global *global, int key);
 

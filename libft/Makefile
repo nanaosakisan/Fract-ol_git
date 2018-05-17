@@ -17,7 +17,6 @@ SRC_NAME =	error.c 					\
 			ft_atoi.c					\
 			ft_bzero.c					\
 			count_word.c				\
-			draw_segment.c				\
 			ft_isalnum.c				\
 			ft_isalpha.c				\
 			ft_isascii.c				\
@@ -75,8 +74,7 @@ SRC_NAME =	error.c 					\
 			ft_strtrim.c				\
 			ft_toupper.c				\
 			ft_tolower.c				\
-			get_next_line.c 			\
-			mlx_pixel_put_to_image.c
+			get_next_line.c 			
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 

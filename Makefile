@@ -14,12 +14,15 @@ NAME = fractol
 
 SRC_PATH = src/
 SRC_NAME =	display_color.c				\
+			draw_segment.c				\
 			init_struct.c				\
 			julia.c						\
 			key_hook_1.c				\
 			key_hook_2.c				\
+			launch_fractal.c			\
 			main.c						\
 			mandelbrot.c				\
+			mlx_pixel_put_to_image.c	\
 			mouse_hook.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))

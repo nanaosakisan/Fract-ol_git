@@ -42,7 +42,7 @@ static void	*launch_thread(void *data)
 	{
 		i = -1;
 		while (++i < HEIGHT && i < global->fract[global->id].img_y)
-			global->fract[global->id].function(x, y, global);
+			global->function[global->id](start, i, global);
 	}
 	return (NULL);
 }
@@ -53,9 +53,9 @@ int		select_fract(t_global *global)
 
 	if (!global->img.p_mlx)
 	{
-		global.img.p_mlx = mlx_init();
-		global.img.p_win = mlx_new_window(global.img.p_mlx, WIDTH, HEIGHT, \
-															global.name);
+		global->img.p_mlx = mlx_init();
+		global->img.p_win = mlx_new_window(global->img.p_mlx, WIDTH, HEIGHT, \
+															global->name);
 	}
 	global->img.p_img = mlx_new_image(global->img.p_mlx, WIDTH, HEIGHT);
 	global->img.img_addr = mlx_get_data_addr(global->img.p_img, \
