@@ -44,6 +44,7 @@ static void	*launch_thread(void *data)
 		while (++i < HEIGHT && i < global->fract[global->id].img_y)
 			global->function[global->id](start, i, global);
 	}
+	pthread_exit(NULL);
 	return (NULL);
 }
 
