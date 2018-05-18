@@ -13,7 +13,7 @@
 NAME = fractol
 
 SRC_PATH = src/
-SRC_NAME =	buddhabrot.c				\
+SRC_NAME =	burning_ship.c				\
 			display_color.c				\
 			draw_segment.c				\
 			init_struct.c				\

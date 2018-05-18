@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buddhabrot.c                                       :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 11:36:36 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/05/18 11:36:40 by iporsenn         ###   ########.fr       */
+/*   Created: 2018/05/18 16:43:53 by iporsenn          #+#    #+#             */
+/*   Updated: 2018/05/18 16:43:55 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int		buddha(int x, int y, t_global *global)
+int		ship(int x, int y, t_global *global)
 {
 	int			i;
 	long double	z[2];
@@ -28,7 +28,7 @@ int		buddha(int x, int y, t_global *global)
 	{
 		tmp = z[0];
 		z[0] = z[0] * z[0] - z[1] * z[1] + c[0];
-		z[1] = 2 * z[1] * tmp - c[1];
+		z[1] = fabsl(2 * z[1] * z[0]) + c[1];
 		i++;
 	}
 	color(global, x, y, i);

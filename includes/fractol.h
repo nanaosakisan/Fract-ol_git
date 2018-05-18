@@ -21,7 +21,7 @@
 
 # define HEIGHT 800
 # define WIDTH 800
-# define THREAD 1
+# define THREAD 16
 typedef	struct	s_img
 {
 	void	*p_mlx;
@@ -81,7 +81,6 @@ typedef struct	s_global
 	pthread_t		thread[THREAD];
 }				t_global;
 
-int			buddha(int x, int y, t_global *global);
 int			close_map(t_global *global, int key);
 void		color(t_global *global, int x, int y, int i);
 int			deal_key(int key, t_global *global);
@@ -100,6 +99,7 @@ int			move_right_and_left(t_global *global, int key);
 int			move_up_and_down(t_global *global, int key);
 int			pointed_zoom(int key, int x, int y, t_global *global);
 int			select_fract(t_global *global);
+int			ship(int x, int y, t_global *global);
 int			switch_color(t_global *global, int key);
 int			tricorn(int x, int y, t_global *global);
 int			zoom(t_global *global, int key);

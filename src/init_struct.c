@@ -61,21 +61,29 @@ static void	init_tricorn(t_global *global)
 	global->fract[2].zoom_y = 0;
 }
 
-static void	init_buddha(t_global *global)
+static void	init_ship(t_global *global)
 {
-	global->fract[3].name = "buddhabrot";
-	global->fract[0].y1 = -1.3;
-	global->fract[0].y2 = 1.2;
-	global->fract[0].x1 = -2.1;
-	global->fract[0].x2 = 0.6;
-	global->fract[0].img_y = 0;
-	global->fract[0].img_x = 0;
-	global->fract[0].zoom_x = 0;
-	global->fract[0].zoom_y = 0;
+	global->fract[3].name = "burning_ship";
+	global->fract[3].y1 = -2;
+	global->fract[3].y2 = 1;
+	global->fract[3].x1 = -1.8;
+	global->fract[3].x2 = 1;
+	global->fract[3].img_y = 0;
+	global->fract[3].img_x = 0;
+	global->fract[3].zoom_x = 0;
+	global->fract[3].zoom_y = 0;
 }
 
 void 		init_tmp(t_global *global)
 {
+	if (global->id == 0)
+		global->iter_max = 100;
+	else if (global->id == 1)
+		global->iter_max = 150;
+	else if (global->id == 2)
+		global->iter_max = 30;
+	else if (global->id == 3)
+		global->iter_max = 1000;
 	global->tmp.iter_max = global->iter_max;
 	global->tmp.zoom = global->zoom;
 	global->tmp.y1 = global->fract[global->id].y1;
@@ -96,8 +104,8 @@ static void	init_color(t_color *color)
 	color->color[1][2] = 0x7FFCFF;
 	color->color[1][3] = 0xFFFFFF;
 	color->color[2][0] = 0x000000;
-	color->color[2][1] = 0xD3FFCE;
-	color->color[2][2] = 0xE9FFE6;
+	color->color[2][1] = 0xE50000;
+	color->color[2][2] = 0xF27F7F;
 	color->color[2][3] = 0xFFFFFF;
 }
 
@@ -111,7 +119,7 @@ void		init_global(t_global *global)
 	global->function[0] = &mandel;
 	global->function[1] = &julia;
 	global->function[2] = &tricorn;
-	global->function[3] = &buddha;
+	global->function[3] = &ship;
 	global->key_func[0] = &close_map;
 	global->key_func[1] = &move_up_and_down;
 	global->key_func[2] = &move_right_and_left;
@@ -122,14 +130,12 @@ void		init_global(t_global *global)
 	global->mouse_func[0] = &pointed_zoom;
 	global->len_mouse = 1;
 	global->zoom = 300;
-	global->iter_max = 200;
-	global->iter_min = 50;
 	while (++i < THREAD)
 		global->thread[i] = 0;
 	init_img(&global->img);
 	init_mandel(global);
 	init_julia(global);
 	init_tricorn(global);
-	init_buddha(global);
+	init_ship(global);
 	init_color(&global->color);
 }
