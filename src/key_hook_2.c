@@ -28,7 +28,7 @@ int		iteration(t_global *global, int key)
 	return (1);
 }
 
-	int		switch_color(t_global *global, int key)
+int		switch_color(t_global *global, int key)
 {
 	if (key != 256)
 		return (0);

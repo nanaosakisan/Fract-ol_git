@@ -12,7 +12,7 @@
 
 #include "../includes/fractol.h"
 
-static int	get_thread_id(pthread_t id, pthread_t *thread)
+static int		get_thread_id(pthread_t id, pthread_t *thread)
 {
 	int i;
 
@@ -22,7 +22,7 @@ static int	get_thread_id(pthread_t id, pthread_t *thread)
 	return (i);
 }
 
-static void	*launch_thread(void *data)
+static void		*launch_thread(void *data)
 {
 	int			start;
 	int			end;
@@ -38,7 +38,8 @@ static void	*launch_thread(void *data)
 				(global->fract[global->id].x2 - global->fract[global->id].x1);
 	global->fract[global->id].zoom_y = global->fract[global->id].img_y / \
 				(global->fract[global->id].y2 - global->fract[global->id].y1);
-	while (++start < WIDTH && start < end && start < global->fract[global->id].img_x)
+	while (++start < WIDTH && start < end && start < \
+												global->fract[global->id].img_x)
 	{
 		i = -1;
 		while (++i < HEIGHT && i < global->fract[global->id].img_y)
@@ -48,15 +49,15 @@ static void	*launch_thread(void *data)
 	return (NULL);
 }
 
-int		select_fract(t_global *global)
+int				select_fract(t_global *global)
 {
 	int i;
 
 	if (!global->img.p_mlx)
 	{
 		global->img.p_mlx = mlx_init();
-		global->img.p_win = mlx_new_window(global->img.p_mlx, WIDTH, HEIGHT, \
-															global->name);
+		global->img.p_win = mlx_new_window(global->img.p_mlx, WIDTH, HEIGHT + \
+													HEIGHT_UI, global->name);
 	}
 	global->img.p_img = mlx_new_image(global->img.p_mlx, WIDTH, HEIGHT);
 	global->img.img_addr = mlx_get_data_addr(global->img.p_img, \

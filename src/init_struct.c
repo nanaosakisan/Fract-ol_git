@@ -22,59 +22,7 @@ static void	init_img(t_img *img)
 	img->endian = 0;
 }
 
-static void	init_mandel(t_global *global)
-{
-	global->fract[0].name = "mandelbrot";
-	global->fract[0].y1 = -1.3;
-	global->fract[0].y2 = 1.2;
-	global->fract[0].x1 = -2.1;
-	global->fract[0].x2 = 0.6;
-	global->fract[0].img_y = 0;
-	global->fract[0].img_x = 0;
-	global->fract[0].zoom_x = 0;
-	global->fract[0].zoom_y = 0;
-}
-
-static void	init_julia(t_global *global)
-{
-	global->fract[1].name = "julia";
-	global->fract[1].y1 = -1.3;
-	global->fract[1].y2 = 1.7;
-	global->fract[1].x1 = -1.4;
-	global->fract[1].x2 = 1.3;
-	global->fract[1].img_y = 0;
-	global->fract[1].img_x = 0;
-	global->fract[1].zoom_x = 0;
-	global->fract[1].zoom_y = 0;
-}
-
-static void	init_tricorn(t_global *global)
-{
-	global->fract[2].name = "tricorn";
-	global->fract[2].y1 = -1.3;
-	global->fract[2].y2 = 1.5;
-	global->fract[2].x1 = -2;
-	global->fract[2].x2 = 1;
-	global->fract[2].img_y = 0;
-	global->fract[2].img_x = 0;
-	global->fract[2].zoom_x = 0;
-	global->fract[2].zoom_y = 0;
-}
-
-static void	init_ship(t_global *global)
-{
-	global->fract[3].name = "burning_ship";
-	global->fract[3].y1 = -2;
-	global->fract[3].y2 = 1;
-	global->fract[3].x1 = -1.8;
-	global->fract[3].x2 = 1;
-	global->fract[3].img_y = 0;
-	global->fract[3].img_x = 0;
-	global->fract[3].zoom_x = 0;
-	global->fract[3].zoom_y = 0;
-}
-
-void 		init_tmp(t_global *global)
+void		init_tmp(t_global *global)
 {
 	if (global->id == 0)
 		global->iter_max = 100;
@@ -83,7 +31,7 @@ void 		init_tmp(t_global *global)
 	else if (global->id == 2)
 		global->iter_max = 30;
 	else if (global->id == 3)
-		global->iter_max = 1000;
+		global->iter_max = 30;
 	global->tmp.iter_max = global->iter_max;
 	global->tmp.zoom = global->zoom;
 	global->tmp.y1 = global->fract[global->id].y1;
@@ -92,21 +40,30 @@ void 		init_tmp(t_global *global)
 	global->tmp.x2 = global->fract[global->id].x2;
 }
 
-static void	init_color(t_color *color)
+static void	init_bonus(t_bonus *bonus)
 {
-	color->turn = 0;
-	color->color[0][0] = 0x000000;
-	color->color[0][1] = 0xFD00FF;
-	color->color[0][2] = 0xFE7FFF;
-	color->color[0][3] = 0xFFFFFF;
-	color->color[1][0] = 0x000000;
-	color->color[1][1] = 0x00F9FF;
-	color->color[1][2] = 0x7FFCFF;
-	color->color[1][3] = 0xFFFFFF;
-	color->color[2][0] = 0x000000;
-	color->color[2][1] = 0xE50000;
-	color->color[2][2] = 0xF27F7F;
-	color->color[2][3] = 0xFFFFFF;
+	bonus->p_img = NULL;
+	bonus->img_addr = NULL;
+	bonus->size = 0;
+	bonus->endian = 0;
+}
+
+static void	init_color(t_global *global)
+{
+	global->color.turn = 0;
+	global->color.color[0][0] = 0x000000;
+	global->color.color[0][1] = 0xFD00FF;
+	global->color.color[0][2] = 0x301637;
+	global->color.color[0][3] = 0xFFFFFF;
+	global->color.color[1][0] = 0x000000;
+	global->color.color[1][1] = 0x00F9FF;
+	global->color.color[1][2] = 0x003133;
+	global->color.color[1][3] = 0xFFFFFF;
+	global->color.color[2][0] = 0x000000;
+	global->color.color[2][1] = 0xE50000;
+	global->color.color[2][2] = 0x440000;
+	global->color.color[2][3] = 0xFFFFFF;
+	init_bonus(&global->bonus);
 }
 
 void		init_global(t_global *global)
@@ -128,14 +85,12 @@ void		init_global(t_global *global)
 	global->key_func[5] = &switch_color;
 	global->len_key = 6;
 	global->mouse_func[0] = &pointed_zoom;
-	global->len_mouse = 1;
-	global->zoom = 300;
+	global->mouse_func[1] = &turn_julia;
+	global->len_mouse = 2;
+	global->zoom = 230;
 	while (++i < THREAD)
 		global->thread[i] = 0;
 	init_img(&global->img);
 	init_mandel(global);
-	init_julia(global);
-	init_tricorn(global);
-	init_ship(global);
-	init_color(&global->color);
+	init_color(global);
 }
