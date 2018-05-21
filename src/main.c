@@ -21,7 +21,7 @@ int		main(int ac, char **av)
 	if (ac != 2 || (ft_strcmp(av[1], "mandelbrot") != 0 && ft_strcmp(av[1], \
 		"julia") != 0 && ft_strcmp(av[1], "tricorn") != 0 && ft_strcmp(av[1], \
 		"burning_ship") != 0 && ft_strcmp(av[1], "buh2") != 0))
-		error("usage: ./factol mandelbrot/julia/tricorn");
+		error("usage: ./factol mandelbrot/julia/tricorn/burning_ship");
 	else
 	{
 		init_global(&global);

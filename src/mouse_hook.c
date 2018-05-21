@@ -14,42 +14,19 @@
 
 int		pointed_zoom(int key, int x, int y, t_global *global)
 {
-	double tmp_x[2];
-	double tmp_y[2];
-
-	tmp_x[0] = global->fract[global->id].x1 + x * (global->fract[global->id].x2\
-										- global->fract[global->id].x1) / WIDTH;
-	tmp_y[0] = global->fract[global->id].y1 + y * (global->fract[global->id].y2\
-									- global->fract[global->id].y1) / HEIGHT;
-	tmp_x[1] = global->fract[global->id].x1;
-	tmp_y[1] = global->fract[global->id].y1;
 	if (key != 1 && key != 2 && !x && !y)
 		return (0);
 	else if (key == 1)
 	{
-		global->zoom *= 1.5;
-		global->fract[global->id].x1 = tmp_x[0] - (global->fract[global->id].x2\
-											- global->fract[global->id].x1) / 3;
-		global->fract[global->id].x2 = tmp_x[0] + (global->fract[global->id].x2\
-																- tmp_x[1]) / 3;
-		global->fract[global->id].y1 = tmp_y[0] - (global->fract[global->id].y2\
-											- global->fract[global->id].y1) / 3;
-		global->fract[global->id].y2 = tmp_y[0] + (global->fract[global->id].y2\
-																- tmp_y[1]) / 3;
-		global->iter_max++;
+		global->fract[global->id].x1 += (((float)x - (WIDTH / 2)) / global->zoom);
+		global->fract[global->id].y1 += (((float)y - (HEIGHT / 2)) / global->zoom);
+		global->zoom *= 1.2;
 	}
 	else if (key == 2)
 	{
-		global->zoom /= 1.5;
-		global->fract[global->id].x1 = tmp_x[0] - (global->fract[global->id].x2\
-												- global->fract[global->id].x1);
-		global->fract[global->id].x2 = tmp_x[0] + (global->fract[global->id].x2\
-																	- tmp_x[1]);
-		global->fract[global->id].y1 = tmp_y[0] - (global->fract[global->id].y2\
-												- global->fract[global->id].y1);
-		global->fract[global->id].y2 = tmp_y[0] + (global->fract[global->id].y2\
-																	- tmp_y[1]);
-		global->iter_max--;
+		global->fract[global->id].x1 -= (((float)x - (WIDTH / 2)) / global->zoom);
+		global->fract[global->id].y1 -= (((float)y - (HEIGHT / 2)) / global->zoom);
+		global->zoom *= 0.8;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	select_fract(global);
@@ -58,7 +35,6 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 
 int		turn_julia(int key, int x, int y, t_global *global)
 {
-	ft_putendl("buh");
 	if ((key != 4 && key != 5) || !x || !y)
 		return (0);
 	else if (key == 4)

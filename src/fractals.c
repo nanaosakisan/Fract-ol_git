@@ -99,7 +99,7 @@ int		ship(int x, int y, t_global *global)
 	while ((z[0] * z[0] + z[1] * z[1] < 4) && i < global->iter_max)
 	{
 		tmp = fabsl(z[0] * z[0] - z[1] * z[1] + c[0]);
-		z[1] = fabsl(2 * z[0] * z[1]) + c[1];
+		z[1] = 2 * fabsl(z[0] * z[1]) + c[1];
 		z[0] = tmp;
 		i++;
 	}

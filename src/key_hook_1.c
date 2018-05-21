@@ -74,6 +74,8 @@ int		close_map(t_global *global, int key)
 	global->img.p_win = NULL;
 	global->img.p_img = NULL;
 	global->img.img_addr = NULL;
+	global->bonus.p_img = NULL;
+	global->bonus.img_addr = NULL;
 	exit(EXIT_SUCCESS);
 }
 
