@@ -75,7 +75,7 @@ int		tricorn(int x, int y, t_global *global)
 	{
 		tmp = z[0];
 		z[0] = z[0] * z[0] - z[1] * z[1] + c[0];
-		z[1] = -2 * z[1] * z[0] + c[1];
+		z[1] = -2 * z[1] * tmp + c[1];
 		i++;
 	}
 	color(global, x, y, i);

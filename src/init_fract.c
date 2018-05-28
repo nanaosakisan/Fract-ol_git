@@ -30,7 +30,7 @@ static void	init_tricorn(t_global *global)
 	global->fract[2].name = "tricorn";
 	global->fract[2].y1 = -1.3;
 	global->fract[2].y2 = 1.5;
-	global->fract[2].x1 = -2;
+	global->fract[2].x1 = -1.7;
 	global->fract[2].x2 = 1.5;
 	global->fract[2].img_y = 0;
 	global->fract[2].img_x = 0;
