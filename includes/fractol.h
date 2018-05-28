@@ -85,7 +85,7 @@ typedef struct	s_global
 	t_bonus			bonus;
 	int 			(*function[4])(int, int, struct s_global*);
 	int				(*key_func[6]) (struct s_global*, int);
-	int				(*mouse_func[2]) (int, int, int, struct s_global*);
+	int				(*mouse_func[3]) (int, int, int, struct s_global*);
 	int				len_key;
 	int				len_mouse;
 	long double		zoom;
@@ -117,6 +117,7 @@ int			select_fract(t_global *global);
 int			ship(int x, int y, t_global *global);
 int			switch_color(t_global *global, int key);
 int			tricorn(int x, int y, t_global *global);
+int			turn_fract(int key, int x, int y, t_global *global);
 int			turn_julia(int key, int x, int y, t_global *global);
 int			zoom(t_global *global, int key);
 

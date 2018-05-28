@@ -14,7 +14,7 @@
 
 int		pointed_zoom(int key, int x, int y, t_global *global)
 {
-	if (key != 1 && key != 2 && !x && !y)
+	if ((key != 1 && key != 2) || (!x && !y))
 		return (0);
 	else if (key == 1)
 	{
@@ -35,7 +35,7 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 
 int		turn_julia(int key, int x, int y, t_global *global)
 {
-	if ((key != 4 && key != 5) || !x || !y)
+	if ((key != 4 && key != 5) || (!x && !y))
 		return (0);
 	else if (key == 4)
 		global->fract[1].turn += (global->fract[1].turn < 3) ? 1 : -3;
@@ -61,12 +61,24 @@ int		turn_julia(int key, int x, int y, t_global *global)
 	return (1);
 }
 
+int		turn_fract(int key, int x, int y, t_global *global)
+{
+	if ((key != 3) || (!x && !y))
+		return (0);
+	else if (key == 3)
+		global->id += (global->id < 3) ? 1 : -3;
+	init_tmp(global);
+	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
+	select_fract(global);
+	return (1);
+}
+
 int		mouse_hook(int key, int x, int y, t_global *global)
 {
 	int i;
 
 	i = 0;
-	while (i < global->len_mouse && !global->mouse_func[i](key, x, y, global))
+	while ((i < global->len_mouse) && !global->mouse_func[i](key, x, y, global))
 		i++;
 	return (0);
 }

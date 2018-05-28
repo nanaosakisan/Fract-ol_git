@@ -86,7 +86,8 @@ void		init_global(t_global *global)
 	global->len_key = 6;
 	global->mouse_func[0] = &pointed_zoom;
 	global->mouse_func[1] = &turn_julia;
-	global->len_mouse = 2;
+	global->mouse_func[2] = &turn_fract;
+	global->len_mouse = 3;
 	global->zoom = 230;
 	while (++i < THREAD)
 		global->thread[i] = 0;
