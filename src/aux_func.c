@@ -26,6 +26,10 @@ static void	right_ui(t_global *global)
 													"CHANGER PARAMETRE JULIA ");
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 300, 790, 0xFFFFFF, \
 													": MOLETTE SOURIS ");
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 10, 820, 0xFFFFFF, \
+													"CHANGER FRACTAL ");
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 300, 820, 0xFFFFFF, \
+													": BOUTON COTE SOURIS ");
 }
 
 void		left_ui(t_global *global)
