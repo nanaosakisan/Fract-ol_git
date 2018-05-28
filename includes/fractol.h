@@ -21,7 +21,7 @@
 
 # define HEIGHT 600
 # define WIDTH 600
-# define HEIGHT_UI 240
+# define HEIGHT_UI 250
 # define THREAD 10
 typedef	struct	s_img
 {
