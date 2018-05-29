@@ -31,7 +31,6 @@ static int	display_color(t_global *global, int i, int color1, int color2)
 	color |= tab_2[0] << 16;
 	color |= tab_2[1] << 8;
 	color |= tab_2[2];
-	// printf("iter_max = %d, i = %d, color = %#08x\n", global->iter_max, i, color);
 	return (color);
 }
 

@@ -14,12 +14,23 @@
 
 int		pointed_zoom(int key, int x, int y, t_global *global)
 {
+	float diff_x;
+	float diff_y;
+	float tmp_x;
+	float tmp_y;
+
+	tmp_y = global->fract[global->id].y1;
+	tmp_x = global->fract[global->id].x1;
 	if ((key != 1 && key != 2) || (!x && !y))
 		return (0);
 	else if (key == 1)
 	{
 		global->fract[global->id].x1 += (((float)x - (WIDTH / 2)) / global->zoom);
 		global->fract[global->id].y1 += (((float)y - (HEIGHT / 2)) / global->zoom);
+		diff_y = fabsl(tmp_y + global->fract[global->id].y1);
+		diff_x = fabsl(tmp_x + global->fract[global->id].x1);
+		global->fract[global->id].x2 += diff_x;
+		global->fract[global->id].y2 += diff_y;
 		global->zoom *= 1.2;
 		global->iter_max++;
 	}
@@ -27,6 +38,10 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 	{
 		global->fract[global->id].x1 -= (((float)x - (WIDTH / 2)) / global->zoom);
 		global->fract[global->id].y1 -= (((float)y - (HEIGHT / 2)) / global->zoom);
+		diff_y = fabsl(tmp_y + global->fract[global->id].y1);
+		diff_x = fabsl(tmp_x + global->fract[global->id].x1);
+		global->fract[global->id].x2 += diff_x;
+		global->fract[global->id].y2 += diff_y;
 		global->zoom *= 0.8;
 		global->iter_max--;
 	}

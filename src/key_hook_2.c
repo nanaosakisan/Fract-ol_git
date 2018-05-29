@@ -23,7 +23,6 @@ int		iteration(t_global *global, int key)
 		if (global->iter_max > 2)
 			global->iter_max -= 1;
 	}
-	// printf("iter_max = %d\n", global->iter_max);
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	select_fract(global);
 	return (1);
