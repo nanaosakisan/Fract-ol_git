@@ -28,7 +28,7 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 		global->fract[global->id].x1 -= (((float)x - (WIDTH / 2)) / global->zoom);
 		global->fract[global->id].y1 -= (((float)y - (HEIGHT / 2)) / global->zoom);
 		global->zoom *= 0.8;
-		global->iter_max++;
+		global->iter_max--;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	select_fract(global);

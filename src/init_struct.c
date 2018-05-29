@@ -25,7 +25,7 @@ static void	init_img(t_img *img)
 void		init_tmp(t_global *global)
 {
 	if (global->id == 0)
-		global->iter_max = 100;
+		global->iter_max = 50;
 	else if (global->id == 1)
 		global->iter_max = 150;
 	else if (global->id == 2)
@@ -52,16 +52,16 @@ static void	init_color(t_global *global)
 {
 	global->color.turn = 0;
 	global->color.color[0][0] = 0x000000;
-	global->color.color[0][1] = 0xFD00FF;
-	global->color.color[0][2] = 0x301637;
+	global->color.color[0][1] = 0x301637;
+	global->color.color[0][2] = 0xFD00FF;
 	global->color.color[0][3] = 0xFFFFFF;
 	global->color.color[1][0] = 0x000000;
-	global->color.color[1][1] = 0x00F9FF;
-	global->color.color[1][2] = 0x003133;
+	global->color.color[1][1] = 0x003133;
+	global->color.color[1][2] = 0x00F9FF;
 	global->color.color[1][3] = 0xFFFFFF;
 	global->color.color[2][0] = 0x000000;
-	global->color.color[2][1] = 0xE50000;
-	global->color.color[2][2] = 0x440000;
+	global->color.color[2][1] = 0x440000;
+	global->color.color[2][2] = 0xE50000;
 	global->color.color[2][3] = 0xFFFFFF;
 	init_bonus(&global->bonus);
 }
