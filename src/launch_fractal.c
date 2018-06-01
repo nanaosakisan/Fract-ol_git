@@ -56,8 +56,8 @@ int				select_fract(t_global *global)
 	if (!global->img.p_mlx)
 	{
 		global->img.p_mlx = mlx_init();
-		global->img.p_win = mlx_new_window(global->img.p_mlx, WIDTH, HEIGHT + \
-													HEIGHT_UI, global->name);
+		global->img.p_win = mlx_new_window(global->img.p_mlx, WIDTH + WIDTH_UI,\
+			 											HEIGHT, global->name);
 	}
 	global->img.p_img = mlx_new_image(global->img.p_mlx, WIDTH, HEIGHT);
 	global->img.img_addr = mlx_get_data_addr(global->img.p_img, \

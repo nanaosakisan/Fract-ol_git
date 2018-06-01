@@ -19,9 +19,9 @@
 # include <pthread.h>
 # include <stdio.h>
 
-# define HEIGHT 600
-# define WIDTH 600
-# define HEIGHT_UI 250
+# define HEIGHT 500
+# define WIDTH 500
+# define WIDTH_UI 590
 # define THREAD 10
 typedef	struct	s_img
 {
@@ -99,6 +99,7 @@ int			close_map(t_global *global, int key);
 void		color(t_global *global, int x, int y, int i);
 int			deal_key(int key, t_global *global);
 void		draw_segment(float *coord_src, float *coord_dst, t_global *global);
+void		first_ui(t_global *global);
 void		init_global(t_global *global);
 void		init_mandel(t_global *global);
 int			init_map(t_global *global, int key);
@@ -106,7 +107,6 @@ void 		init_tmp(t_global *global);
 int			iteration(t_global *global, int key);
 int			select_fract(t_global *global);
 int			julia(int x, int y, t_global *global);
-void		left_ui(t_global *global);
 int			main(int ac, char **av);
 int			mandel(int x, int y, t_global *global);
 void		mlx_pixel_put_to_image(t_global *global, int x, int y, int color);
@@ -118,6 +118,7 @@ int			pointed_zoom(int key, int x, int y, t_global *global);
 int			select_fract(t_global *global);
 int			ship(int x, int y, t_global *global);
 int			switch_color(t_global *global, int key);
+void		third_ui(t_global *global);
 int			tricorn(int x, int y, t_global *global);
 int			turn_fract(int key, int x, int y, t_global *global);
 int			zoom(t_global *global, int key);

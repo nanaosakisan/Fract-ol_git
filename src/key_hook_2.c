@@ -41,6 +41,8 @@ int		switch_color(t_global *global, int key)
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	select_fract(global);
+	// mlx_destroy_image(global->img.p_mlx, global->bonus.p_img);
+	// first_ui(global);
 	return (1);
 }
 

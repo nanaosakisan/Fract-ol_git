@@ -31,7 +31,7 @@ int		main(int ac, char **av)
 		global.id = i;
 		init_tmp(&global);
 		select_fract(&global);
-		left_ui(&global);
+		first_ui(&global);
 		mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
 		if (global.id == 1)
 			mlx_hook(global.img.p_win, 6, (1L << 6), mouse_position, &global);
