@@ -33,6 +33,8 @@ int		main(int ac, char **av)
 		select_fract(&global);
 		left_ui(&global);
 		mlx_hook(global.img.p_win, 2, (1L << 0), deal_key, &global);
+		if (global.id == 1)
+			mlx_hook(global.img.p_win, 6, (1L << 6), mouse_position, &global);
 		mlx_mouse_hook(global.img.p_win, mouse_hook, &global);
 		mlx_loop(global.img.p_mlx);
 	}

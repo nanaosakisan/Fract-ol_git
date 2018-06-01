@@ -84,7 +84,7 @@ typedef struct	s_global
 	t_color			color;
 	t_bonus			bonus;
 	int 			(*function[4])(int, int, struct s_global*);
-	int				(*key_func[6]) (struct s_global*, int);
+	int				(*key_func[7]) (struct s_global*, int);
 	int				(*mouse_func[3]) (int, int, int, struct s_global*);
 	int				len_key;
 	int				len_mouse;
@@ -94,6 +94,7 @@ typedef struct	s_global
 	pthread_t		thread[THREAD];
 }				t_global;
 
+int			activate_mouse_position(t_global *global, int key);
 int			close_map(t_global *global, int key);
 void		color(t_global *global, int x, int y, int i);
 int			deal_key(int key, t_global *global);
@@ -110,6 +111,7 @@ int			main(int ac, char **av);
 int			mandel(int x, int y, t_global *global);
 void		mlx_pixel_put_to_image(t_global *global, int x, int y, int color);
 int			mouse_hook(int key, int x, int y, t_global *global);
+int			mouse_position(int x, int y, t_global *param);
 int			move_right_and_left(t_global *global, int key);
 int			move_up_and_down(t_global *global, int key);
 int			pointed_zoom(int key, int x, int y, t_global *global);
@@ -118,7 +120,7 @@ int			ship(int x, int y, t_global *global);
 int			switch_color(t_global *global, int key);
 int			tricorn(int x, int y, t_global *global);
 int			turn_fract(int key, int x, int y, t_global *global);
-int			turn_julia(int key, int x, int y, t_global *global);
 int			zoom(t_global *global, int key);
+int			zoom_molette(int key, int x, int y, t_global *global);
 
 # endif

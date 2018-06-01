@@ -43,3 +43,19 @@ int		switch_color(t_global *global, int key)
 	select_fract(global);
 	return (1);
 }
+
+int		activate_mouse_position(t_global *global, int key)
+{
+	if (key != 257)
+		return (0);
+	else
+	{
+		if (global->id == 1)
+			global->fract[1].turn += (global->fract[1].turn == 0) ? 1 : -1;
+		else
+			return (0);
+	}
+	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
+	select_fract(global);
+	return (1);
+}

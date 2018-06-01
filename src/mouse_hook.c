@@ -12,25 +12,30 @@
 
 #include "../includes/fractol.h"
 
-int		pointed_zoom(int key, int x, int y, t_global *global)
+static void	adjustment(int tmp_x, int tmp_y, t_global *global)
 {
 	float diff_x;
 	float diff_y;
-	float tmp_x;
-	float tmp_y;
 
-	tmp_y = global->fract[global->id].y1;
-	tmp_x = global->fract[global->id].x1;
+	diff_y = fabsl(tmp_y + global->fract[global->id].y1);
+	diff_x = fabsl(tmp_x + global->fract[global->id].x1);
+	global->fract[global->id].x2 += diff_x;
+	global->fract[global->id].y2 += diff_y;
+}
+
+int			pointed_zoom(int key, int x, int y, t_global *global)
+{
+	float tmp[2];
+
+	tmp[0] = global->fract[global->id].y1;
+	tmp[1] = global->fract[global->id].x1;
 	if ((key != 1 && key != 2) || (!x && !y))
 		return (0);
 	else if (key == 1)
 	{
 		global->fract[global->id].x1 += (((float)x - (WIDTH / 2)) / global->zoom);
 		global->fract[global->id].y1 += (((float)y - (HEIGHT / 2)) / global->zoom);
-		diff_y = fabsl(tmp_y + global->fract[global->id].y1);
-		diff_x = fabsl(tmp_x + global->fract[global->id].x1);
-		global->fract[global->id].x2 += diff_x;
-		global->fract[global->id].y2 += diff_y;
+		adjustment(tmp[1], tmp[0], global);
 		global->zoom *= 1.2;
 		global->iter_max++;
 	}
@@ -38,10 +43,7 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 	{
 		global->fract[global->id].x1 -= (((float)x - (WIDTH / 2)) / global->zoom);
 		global->fract[global->id].y1 -= (((float)y - (HEIGHT / 2)) / global->zoom);
-		diff_y = fabsl(tmp_y + global->fract[global->id].y1);
-		diff_x = fabsl(tmp_x + global->fract[global->id].x1);
-		global->fract[global->id].x2 += diff_x;
-		global->fract[global->id].y2 += diff_y;
+		adjustment(tmp[1], tmp[0], global);
 		global->zoom *= 0.8;
 		global->iter_max--;
 	}
@@ -50,31 +52,47 @@ int		pointed_zoom(int key, int x, int y, t_global *global)
 	return (1);
 }
 
-int		turn_julia(int key, int x, int y, t_global *global)
+int		zoom_molette(int key, int x, int y, t_global *global)
 {
+	float tmp[2];
+
+	tmp[0] = global->fract[global->id].y1;
+	tmp[1] = global->fract[global->id].x1;
 	if ((key != 4 && key != 5) || (!x && !y))
 		return (0);
-	else if (key == 4)
-		global->fract[1].turn += (global->fract[1].turn < 3) ? 1 : -3;
 	else if (key == 5)
-		global->fract[1].turn -= (global->fract[1].turn > 0) ? 1 : -3;
-	if (global->fract[1].turn == 0)
 	{
-		global->fract[1].c[0] = -0.7269;
-		global->fract[1].c[1] = 0.1889;
+		global->fract[global->id].x1 += (((float)x - (WIDTH / 2)) / global->zoom);
+		global->fract[global->id].y1 += (((float)y - (HEIGHT / 2)) / global->zoom);
+		adjustment(tmp[1], tmp[0], global);
+		global->zoom *= 1.2;
+		global->iter_max++;
 	}
-	else if (global->fract[1].turn == 1)
+	else if (key == 4)
 	{
-		global->fract[1].c[0] = -0.8;
-		global->fract[1].c[1] = 0.156;
-	}
-	else if (global->fract[1].turn == 2)
-	{
-		global->fract[1].c[0] = -0.70176;
-		global->fract[1].c[1] = 0.3842;
+		global->fract[global->id].x1 -= (((float)x - (WIDTH / 2)) / global->zoom);
+		global->fract[global->id].y1 -= (((float)y - (HEIGHT / 2)) / global->zoom);
+		adjustment(tmp[1], tmp[0], global);
+		global->zoom *= 0.8;
+		global->iter_max--;
 	}
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	select_fract(global);
+	return (1);
+}
+
+int		mouse_position(int x, int y, t_global *global)
+{
+	if (global->fract[1].turn == 1)
+	{
+		global->fract[1].c[0] = (global->fract[1].c[0] + y) / 1000;
+		global->fract[1].c[1] = (global->fract[1].c[1] + x) / 1000;
+		// printf("c[0] = %Lf, c[1] = %Lf\n", global->fract[1].c[0], global->fract[1].c[1]);
+		mlx_destroy_image(global->img.p_mlx, global->img.p_img);
+		select_fract(global);
+	}
+	else
+		return (0);
 	return (1);
 }
 
@@ -83,7 +101,10 @@ int		turn_fract(int key, int x, int y, t_global *global)
 	if ((key != 3) || (!x && !y))
 		return (0);
 	else if (key == 3)
+	{
+		global->zoom = 230;
 		global->id += (global->id < 3) ? 1 : -3;
+	}
 	init_tmp(global);
 	mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 	select_fract(global);

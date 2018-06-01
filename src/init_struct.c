@@ -83,10 +83,11 @@ void		init_global(t_global *global)
 	global->key_func[3] = &init_map;
 	global->key_func[4] = &iteration;
 	global->key_func[5] = &switch_color;
-	global->len_key = 6;
+	global->key_func[6] = &activate_mouse_position;
+	global->len_key = 7;
 	global->mouse_func[0] = &pointed_zoom;
-	global->mouse_func[1] = &turn_julia;
-	global->mouse_func[2] = &turn_fract;
+	global->mouse_func[1] = &turn_fract;
+	global->mouse_func[2] = &zoom_molette;
 	global->len_mouse = 3;
 	global->zoom = 230;
 	while (++i < THREAD)
