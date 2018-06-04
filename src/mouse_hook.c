@@ -87,7 +87,6 @@ int		mouse_position(int x, int y, t_global *global)
 	{
 		global->fract[1].c[0] = (global->fract[1].c[0] + y) / 1000;
 		global->fract[1].c[1] = (global->fract[1].c[1] + x) / 1000;
-		// printf("c[0] = %Lf, c[1] = %Lf\n", global->fract[1].c[0], global->fract[1].c[1]);
 		mlx_destroy_image(global->img.p_mlx, global->img.p_img);
 		select_fract(global);
 	}

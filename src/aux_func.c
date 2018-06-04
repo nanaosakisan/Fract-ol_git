@@ -25,24 +25,28 @@
 static void	second_ui(t_global *global)
 {
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 130, 0xFFFFFF, \
-											"AUGMENTER/DIMINUER ITERATIONS");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 130, 0xFFFFFF, \
+											"AUGMENTER/DIMINUER");
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 590, 150, 0xFFFFFF, \
+											"ITERATIONS");
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 140, 0xFFFFFF, \
 															": PAGE UP/DOWN");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 160, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 180, 0xFFFFFF, \
 												"CHANGER COULEUR");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 160, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 180, 0xFFFFFF, \
 																": CONTROL");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 190, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 210, 0xFFFFFF, \
 													"CHANGER FRACTAL ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 190, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 210, 0xFFFFFF, \
 													": BOUTON COTE SOURIS ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 220, 0xFFFFFF, \
-										"ACTIVER CHANGEMENT PARAMETRE JULIA ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 220, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 240, 0xFFFFFF, \
+										"ACTIVER CHANGEMENT ");
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 540, 260, 0xFFFFFF, \
+										"PARAMETRE JULIA ");
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 250, 0xFFFFFF, \
 																	": SHIFT ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 250, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 290, 0xFFFFFF, \
 												"CHANGER PARAMETRES JULIA ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 250, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 290, 0xFFFFFF, \
 													": DEPLACEMENT SOURIS ");
 	// third_ui(global);
 }
@@ -53,19 +57,19 @@ void		first_ui(t_global *global)
 																HEIGHT);
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 10, 0xFFFFFF, \
 																	"QUITTER ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 10, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 10, 0xFFFFFF, \
 																	": ECHAP");
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 40, 0xFFFFFF, \
 														"REINITIALISER MAP");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 40, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 40, 0xFFFFFF, \
 																	": 0");
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 70, 0xFFFFFF, \
 																"ZOOM/DEZOOM ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 70, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 70, 0xFFFFFF, \
 													": CLICS SOURIS/MOLETTE");
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 100, 0xFFFFFF, \
 															"DEPLACER MAP ");
-	mlx_string_put(global->img.p_mlx, global->img.p_win, 860, 100, 0xFFFFFF, \
+	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 100, 0xFFFFFF, \
 																": FLECHES");
 	second_ui(global);
 	mlx_put_image_to_window(global->img.p_mlx, global->img.p_win, \
