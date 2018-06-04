@@ -27,7 +27,7 @@ void		init_tmp(t_global *global)
 	if (global->id == 0)
 		global->iter_max = 50;
 	else if (global->id == 1)
-		global->iter_max = 150;
+		global->iter_max = 50;
 	else if (global->id == 2)
 		global->iter_max = 30;
 	else if (global->id == 3)

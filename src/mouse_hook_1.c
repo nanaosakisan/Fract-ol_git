@@ -12,17 +12,6 @@
 
 #include "../includes/fractol.h"
 
-static void	adjustment(int tmp_x, int tmp_y, t_global *global)
-{
-	float diff_x;
-	float diff_y;
-
-	diff_y = fabsl(tmp_y + global->fract[global->id].y1);
-	diff_x = fabsl(tmp_x + global->fract[global->id].x1);
-	global->fract[global->id].x2 += diff_x;
-	global->fract[global->id].y2 += diff_y;
-}
-
 static void	zoom_in(int x, int y, t_global *global)
 {
 	float tmp[2];
@@ -33,7 +22,6 @@ static void	zoom_in(int x, int y, t_global *global)
 															global->zoom);
 	global->fract[global->id].y1 += (((float)y - (HEIGHT / 2)) / \
 															global->zoom);
-	adjustment(tmp[1], tmp[0], global);
 	global->zoom *= 1.2;
 	global->iter_max++;
 }
@@ -48,7 +36,10 @@ static void	zoom_out(int x, int y, t_global *global)
 															global->zoom);
 	global->fract[global->id].y1 -= (((float)y - (HEIGHT / 2)) / \
 															global->zoom);
-	adjustment(tmp[1], tmp[0], global);
+	global->fract[global->id].x2 += (((float)x + (WIDTH / 2)) / \
+															global->zoom);
+	global->fract[global->id].y2 += (((float)y + (HEIGHT / 2)) / \
+															global->zoom);
 	global->zoom *= 0.8;
 	global->iter_max--;
 }

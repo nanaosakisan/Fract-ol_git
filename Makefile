@@ -15,7 +15,6 @@ NAME = fractol
 SRC_PATH = src/
 SRC_NAME =	aux_func.c					\
 			display_color.c				\
-			draw_segment.c				\
 			fractals.c					\
 			init_fract.c				\
 			init_struct.c				\
@@ -25,7 +24,7 @@ SRC_NAME =	aux_func.c					\
 			main.c						\
 			mlx_pixel_put_to_image.c	\
 			mouse_hook_1.c				\
-			mouse_hook_2.c				
+			mouse_hook_2.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 

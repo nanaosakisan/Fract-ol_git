@@ -32,7 +32,12 @@ int			turn_fract(int key, int x, int y, t_global *global)
 		return (0);
 	else if (key == 3)
 	{
-		global->zoom = 230;
+		global->iter_max = global->tmp.iter_max;
+		global->zoom = global->tmp.zoom;
+		global->fract[global->id].x1 = global->tmp.x1;
+		global->fract[global->id].y1 = global->tmp.y1;
+		global->fract[global->id].x2 = global->tmp.x2;
+		global->fract[global->id].y2 = global->tmp.y2;
 		global->id += (global->id < 3) ? 1 : -3;
 	}
 	init_tmp(global);

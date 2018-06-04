@@ -51,8 +51,8 @@ static void	init_julia(t_global *global)
 	global->fract[1].img_x = 0;
 	global->fract[1].zoom_x = 0;
 	global->fract[1].zoom_y = 0;
-	global->fract[1].c[0] = -0.7269;
-	global->fract[1].c[1] = 0.1889;
+	global->fract[1].c[0] = 0.390390;
+	global->fract[1].c[1] = 0.105105;
 	init_tricorn(global);
 }
 

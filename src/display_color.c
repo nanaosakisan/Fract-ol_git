@@ -52,14 +52,14 @@ static void	color_julia(t_global *global, int x, int y, int i)
 {
 	if (i == global->iter_max)
 		mlx_pixel_put_to_image(global, x, y, 0x000000);
-	else if (i < global->iter_max / 2)
-		mlx_pixel_put_to_image(global, x, y, display_color(global, i, \
-								global->color.color[global->color.turn][1], \
-								global->color.color[global->color.turn][2]));
 	else if (i >= global->iter_max / 2 && i <= global->iter_max - 1)
 		mlx_pixel_put_to_image(global, x, y, display_color(global, i, \
 								global->color.color[global->color.turn][2], \
 								global->color.color[global->color.turn][3]));
+	else if (i < global->iter_max / 2)
+		mlx_pixel_put_to_image(global, x, y, display_color(global, i, \
+								global->color.color[global->color.turn][1], \
+								global->color.color[global->color.turn][2]));
 }
 
 static void	color_ship(t_global *global, int x, int y, int i)
