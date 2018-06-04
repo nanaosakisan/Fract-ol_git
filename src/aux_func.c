@@ -12,16 +12,6 @@
 
 #include "../includes/fractol.h"
 
-// void	third_ui(t_global *global)
-// {
-// 	mlx_string_put(global->img.p_mlx, global->img.p_win, 610, 280, 0xFFFFFF, \
-// 															"PALETTE NUMERO");
-// 	mlx_string_put(global->img.p_mlx, global->img.p_win, 960, 280, 0xFFFFFF, \
-// 															":");
-// 	mlx_string_put(global->img.p_mlx, global->img.p_win, 980, 280, 0xFFFFFF, \
-// 												ft_itoa(global->color.turn));
-// }
-
 static void	second_ui(t_global *global)
 {
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 510, 130, 0xFFFFFF, \
@@ -48,7 +38,6 @@ static void	second_ui(t_global *global)
 												"CHANGER PARAMETRES JULIA ");
 	mlx_string_put(global->img.p_mlx, global->img.p_win, 760, 290, 0xFFFFFF, \
 													": DEPLACEMENT SOURIS ");
-	// third_ui(global);
 }
 
 void		first_ui(t_global *global)

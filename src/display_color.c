@@ -46,7 +46,6 @@ static void	color_mandel(t_global *global, int x, int y, int i)
 		mlx_pixel_put_to_image(global, x, y, display_color(global, i, \
 								global->color.color[global->color.turn][1], \
 								global->color.color[global->color.turn][2]));
-
 }
 
 static void	color_julia(t_global *global, int x, int y, int i)

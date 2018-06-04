@@ -24,7 +24,8 @@ SRC_NAME =	aux_func.c					\
 			launch_fractal.c			\
 			main.c						\
 			mlx_pixel_put_to_image.c	\
-			mouse_hook.c
+			mouse_hook_1.c				\
+			mouse_hook_2.c				
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 

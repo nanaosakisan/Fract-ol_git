@@ -40,12 +40,24 @@ void		init_tmp(t_global *global)
 	global->tmp.x2 = global->fract[global->id].x2;
 }
 
-static void	init_bonus(t_bonus *bonus)
+static void	init_ui_keyhook(t_global *global)
 {
-	bonus->p_img = NULL;
-	bonus->img_addr = NULL;
-	bonus->size = 0;
-	bonus->endian = 0;
+	global->bonus.p_img = NULL;
+	global->bonus.img_addr = NULL;
+	global->bonus.size = 0;
+	global->bonus.endian = 0;
+	global->function[0] = &mandel;
+	global->function[1] = &julia;
+	global->function[2] = &tricorn;
+	global->function[3] = &ship;
+	global->key_func[0] = &close_map;
+	global->key_func[1] = &move_up_and_down;
+	global->key_func[2] = &move_right_and_left;
+	global->key_func[3] = &init_map;
+	global->key_func[4] = &iteration;
+	global->key_func[5] = &switch_color;
+	global->key_func[6] = &activate_mouse_position;
+	global->len_key = 7;
 }
 
 static void	init_color(t_global *global)
@@ -63,7 +75,7 @@ static void	init_color(t_global *global)
 	global->color.color[2][1] = 0x440000;
 	global->color.color[2][2] = 0xE50000;
 	global->color.color[2][3] = 0xFFFFFF;
-	init_bonus(&global->bonus);
+	init_ui_keyhook(global);
 }
 
 void		init_global(t_global *global)
@@ -73,18 +85,6 @@ void		init_global(t_global *global)
 	i = -1;
 	global->name = NULL;
 	global->id = 0;
-	global->function[0] = &mandel;
-	global->function[1] = &julia;
-	global->function[2] = &tricorn;
-	global->function[3] = &ship;
-	global->key_func[0] = &close_map;
-	global->key_func[1] = &move_up_and_down;
-	global->key_func[2] = &move_right_and_left;
-	global->key_func[3] = &init_map;
-	global->key_func[4] = &iteration;
-	global->key_func[5] = &switch_color;
-	global->key_func[6] = &activate_mouse_position;
-	global->len_key = 7;
 	global->mouse_func[0] = &pointed_zoom;
 	global->mouse_func[1] = &turn_fract;
 	global->mouse_func[2] = &zoom_molette;
