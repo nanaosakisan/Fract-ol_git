@@ -28,7 +28,7 @@ static void	init_ship(t_global *global)
 static void	init_tricorn(t_global *global)
 {
 	global->fract[2].name = "tricorn";
-	global->fract[2].y1 = -1.3;
+	global->fract[2].y1 = -1.2;
 	global->fract[2].y2 = 1.5;
 	global->fract[2].x1 = -1.7;
 	global->fract[2].x2 = 1.5;
@@ -45,7 +45,7 @@ static void	init_julia(t_global *global)
 	global->fract[1].turn = 0;
 	global->fract[1].y1 = -1.3;
 	global->fract[1].y2 = 4;
-	global->fract[1].x1 = -1.4;
+	global->fract[1].x1 = -1.3;
 	global->fract[1].x2 = 2;
 	global->fract[1].img_y = 0;
 	global->fract[1].img_x = 0;
@@ -61,7 +61,7 @@ void		init_mandel(t_global *global)
 	global->fract[0].name = "mandelbrot";
 	global->fract[0].y1 = -1.3;
 	global->fract[0].y2 = 1.2;
-	global->fract[0].x1 = -2.1;
+	global->fract[0].x1 = -2;
 	global->fract[0].x2 = 0.6;
 	global->fract[0].img_y = 0;
 	global->fract[0].img_x = 0;

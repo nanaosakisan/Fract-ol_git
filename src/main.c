@@ -27,7 +27,6 @@ int		main(int ac, char **av)
 		init_global(&global);
 		while (ft_strcmp(av[1], global.fract[i].name) != 0)
 			i++;
-		global.name = global.fract[i].name;
 		global.id = i;
 		init_tmp(&global);
 		select_fract(&global);

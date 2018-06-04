@@ -83,13 +83,12 @@ void		init_global(t_global *global)
 	int i;
 
 	i = -1;
-	global->name = NULL;
 	global->id = 0;
 	global->mouse_func[0] = &pointed_zoom;
 	global->mouse_func[1] = &turn_fract;
 	global->mouse_func[2] = &zoom_molette;
 	global->len_mouse = 3;
-	global->zoom = 230;
+	global->zoom = 200;
 	while (++i < THREAD)
 		global->thread[i] = 0;
 	init_img(&global->img);

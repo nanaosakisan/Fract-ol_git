@@ -76,7 +76,6 @@ typedef struct	s_bonus
 
 typedef struct	s_global
 {
-	char			*name;
 	int				id;
 	t_img			img;
 	struct s_fract	fract[4];
